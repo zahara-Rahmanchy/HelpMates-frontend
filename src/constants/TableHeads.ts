@@ -1,0 +1,18 @@
+export const opportunityTableHeads = [
+  "Image",
+  "Title",
+  "Organization",
+  "Skills",
+  "Location",
+  "Description",
+  "Status",
+  "Duration",
+  "Start DateTime",
+  "End DateTime",
+  "Benefits",
+  "Created At",
+  "Updated Date",
+  "Application Requests",
+  "Details & Edit",
+  "Remove",
+];

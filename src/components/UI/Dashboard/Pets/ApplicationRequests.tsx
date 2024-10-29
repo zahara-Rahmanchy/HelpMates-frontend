@@ -1,4 +1,5 @@
 import {authKey} from "@/constants/authkey";
+import {useUpdateVolunteerApplicationDataMutation} from "@/redux/api/volunteerApplicationApi";
 import {getFromCookiesClient} from "@/utils/local-storage";
 import {
   Button,
@@ -26,13 +27,14 @@ const tableHeads = [
   "Accept",
   "Reject",
 ];
-const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
-  // console.log("adoptionR", adoptionRequests);
+const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
   const router = useRouter();
-  const accessToken = getFromCookiesClient(authKey);
-  //   const {adoptionRequest} = adoptionRequests;
-  //   console.log("d", adoptionRequest);
-  const handleStatus = async (params: string, id: string, petId: string) => {
+  const [updateVolunteerRequest] = useUpdateVolunteerApplicationDataMutation();
+  const handleStatus = async (
+    params: string,
+    id: string,
+    opportunityId: string
+  ) => {
     const confirmed = confirm(
       `Are you sure you want to ${
         params === "APPROVED" ? "approve" : "reject"
@@ -45,38 +47,33 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
       confirmed,
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-requests/${id}`
     );
-    const updata = {
-      petId: petId,
+    const update = {
+      opportunityId: opportunityId,
       status: params,
     };
     // console.log("upd: ", updata);
-    if (confirmed) {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-requests/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: accessToken ? accessToken : "",
-          },
-          body: JSON.stringify(updata),
-          cache: "no-store",
+    try {
+      if (confirmed) {
+        const res = await updateVolunteerRequest({id, body: update}).unwrap();
+
+        if (res?.id) {
+          toast.success(
+            `Adoption Request ${
+              params === "APPROVED" ? "accepted successfully!" : "rejected!"
+            }`
+          );
+          router.refresh();
+          setOpen(false);
+          // router.refresh();
+          // window.location.reload();
+          // fetchPets();
         }
-      );
-      const data = await res.json();
-      if (data.success) {
-        toast.success(
-          `Adoption Request ${
-            params === "APPROVED" ? "accepted successfully!" : "rejected!"
-          }`
-        );
-        router.refresh();
-        setOpen(false);
-        router.refresh();
-        window.location.reload();
-        // fetchPets();
+      }
+    } catch (err: any) {
+      if (err?.data) {
+        toast.error(`${err.data}`);
       } else {
-        toast.error(data.message);
+        toast.error("Something went wrong");
       }
     }
   };
@@ -89,9 +86,9 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
         my={4}
         // marginTop={"10px"}
       >
-        Adoption Requests
+        Application Requests
       </Typography>
-      {adoptionRequests !== undefined ? (
+      {volunteerRequests !== undefined ? (
         <TableContainer component={Paper}>
           <Table
             sx={{lg: {minWidth: 650}, xs: {minWidth: "100%"}}}
@@ -99,7 +96,7 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
           >
             <TableHead
               sx={{
-                bgcolor: "#f4e0fc",
+                bgcolor: "primary.main",
               }}
             >
               <TableRow>
@@ -108,7 +105,7 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
                     {" "}
                     <Typography
                       textAlign={"center"}
-                      color="primary.main"
+                      color="white"
                       fontWeight={"bold"}
                     >
                       {head}
@@ -118,7 +115,7 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {adoptionRequests.map((value: any, key: number) => (
+              {volunteerRequests.map((value: any, key: number) => (
                 <TableRow key={key}>
                   <TableCell component="th" scope="row">
                     {value?.user?.name as string}
@@ -136,7 +133,11 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
                     <Typography textAlign={"center"}>
                       <Button
                         onClick={() =>
-                          handleStatus("APPROVED", value.id, value.petId)
+                          handleStatus(
+                            "APPROVED",
+                            value.id,
+                            value.opportunityId
+                          )
                         }
                         // size="small"
                         disabled={value.status === "APPROVED"}
@@ -151,7 +152,11 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
                       <Button
                         // disabled={value.status === "APPROVED"}
                         onClick={() =>
-                          handleStatus("REJECTED", value.id, value.petId)
+                          handleStatus(
+                            "REJECTED",
+                            value.id,
+                            value.opportunityId
+                          )
                         }
                         size="small"
                         sx={{background: "crimson"}}
@@ -172,4 +177,4 @@ const AdoptionRequests = ({adoptionRequests, setOpen}: any) => {
   );
 };
 
-export default AdoptionRequests;
+export default ApplicationRequests;

@@ -11,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import {SideBar} from "./Sidebar";
+import {getUserInfo} from "@/services/auth.services";
 
 const drawerWidth = 240;
 
@@ -21,7 +22,7 @@ export default function ResponsiveDrawer({
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-
+  const userInfo = getUserInfo();
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -47,6 +48,8 @@ export default function ResponsiveDrawer({
         sx={{
           width: {sm: `calc(100% - ${drawerWidth}px)`},
           ml: {sm: `${drawerWidth}px`},
+          // color: "primary.main",
+          bgcolor: "primary.main",
         }}
       >
         <Toolbar>
@@ -60,7 +63,7 @@ export default function ResponsiveDrawer({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Admin
+            {userInfo?.role === "Admin" ? "Admin" : "User"}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -99,7 +102,13 @@ export default function ResponsiveDrawer({
       </Box>
       <Box
         component="main"
-        sx={{flexGrow: 1, p: 3, width: {sm: `calc(100% - ${drawerWidth}px)`}}}
+        bgcolor={"#fcfcfc"}
+        minHeight={{lg: "100vh"}}
+        sx={{
+          flexGrow: 1,
+          p: {md: 3, xs: 0},
+          width: {sm: `calc(100% - ${drawerWidth}px)`},
+        }}
       >
         <Toolbar />
         {children}

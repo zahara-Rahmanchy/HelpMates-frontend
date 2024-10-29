@@ -1,7 +1,7 @@
 "use client";
-import EditPetData from "@/components/UI/Dashboard/Pets/EditPetData";
+import EditPetData from "@/components/UI/Dashboard/Pets/EditOpportunityData";
 import {authKey} from "@/constants/authkey";
-import {petTableHeads} from "@/constants/petTableHeads";
+
 import {usersTableHeads} from "@/constants/usersTableHeads";
 import EditUserProfile from "@/services/actions/EditUserProfile";
 import {getFromCookiesClient} from "@/utils/local-storage";
@@ -10,6 +10,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import {
   AppBar,
   Backdrop,
+  Box,
   Button,
   CircularProgress,
   Dialog,
@@ -91,7 +92,22 @@ const UsersPage = () => {
   }, []);
   // console.log("users: ");
   return (
-    <>
+    <Box>
+      <Typography
+        margin={3}
+        component={"h5"}
+        fontSize={"20px"}
+        sx={{
+          border: "1px solid",
+          borderColor: "primary.main",
+          borderRadius: "5px",
+          padding: "10px",
+          width: "200px",
+        }}
+        color={"secondary.dark"}
+      >
+        Total Users: {users?.length}
+      </Typography>
       <Backdrop
         sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
         open={loading}
@@ -99,10 +115,13 @@ const UsersPage = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <TableContainer component={Paper}>
-        <Table sx={{minWidth: 650}} aria-label="simple table">
+        <Table
+          sx={{minWidth: 650, borderRadius: "30px"}}
+          aria-label="simple table"
+        >
           <TableHead
             sx={{
-              bgcolor: "#f4e0fc",
+              bgcolor: "tertiary.light",
             }}
           >
             <TableRow>
@@ -111,9 +130,9 @@ const UsersPage = () => {
                   {" "}
                   <Typography
                     textAlign={"center"}
-                    color="primary.main"
                     fontWeight={"bold"}
-                    fontSize={"14px"}
+                    color="secondary.dark"
+                    fontSize={"12px"}
                   >
                     {head}
                   </Typography>
@@ -172,7 +191,8 @@ const UsersPage = () => {
                 <TableCell component="th" scope="row">
                   {value?.role === "User" ? (
                     <Button
-                      sx={{background: "#f7ad1b"}}
+                      variant="outlined"
+                      sx={{borderColor: "secondary.dark"}}
                       onClick={() =>
                         handleDataEdit(
                           "role",
@@ -188,7 +208,7 @@ const UsersPage = () => {
                       {" "}
                       <Typography
                         fontSize={"12px"}
-                        color="white"
+                        color="secondary.dark"
                         fontWeight={"bold"}
                       >
                         Make Admin
@@ -196,7 +216,7 @@ const UsersPage = () => {
                     </Button>
                   ) : (
                     <Button
-                      sx={{background: "#f7ad1b"}}
+                      sx={{backgroundColor: "secondary.main"}}
                       onClick={() =>
                         handleDataEdit(
                           "role",
@@ -223,7 +243,7 @@ const UsersPage = () => {
                 <TableCell component="th" scope="row">
                   {value?.active ? (
                     <Button
-                      sx={{background: "crimson"}}
+                      sx={{backgroundColor: "crimson"}}
                       onClick={() =>
                         handleDataEdit(
                           "active",
@@ -270,7 +290,7 @@ const UsersPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </>
+    </Box>
   );
 };
 

@@ -17,7 +17,7 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   const userInfo = getUserInfo();
   const location = usePathname();
-  console.log("location: ", location);
+  console.log("userinfo: ", userInfo);
   const hideNav: boolean = location === "/Login" || location === "/Register";
   console.log("hide: ", hideNav);
   return (
@@ -72,7 +72,13 @@ const Navbar = () => {
               <Typography
                 component={Link}
                 color={"white"}
-                href={userInfo ? "/Dashboard/Admin" : "/Login"}
+                href={
+                  userInfo?.role === "Admin"
+                    ? "/Dashboard/Admin"
+                    : userInfo?.role === "User"
+                    ? "/Dashboard/User"
+                    : "/"
+                }
               >
                 Dashboard
               </Typography>

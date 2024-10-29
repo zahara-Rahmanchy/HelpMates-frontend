@@ -185,7 +185,7 @@ const HeroSection = () => {
             py={2}
             position={{md: "absolute", xs: "static"}}
             left="55%"
-            top={{lg: "20%"}}
+            // top={{lg: "20%"}}
           >
             <Typography
               // fontSize={"60px"}

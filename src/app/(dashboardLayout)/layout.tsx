@@ -1,3 +1,4 @@
+"use client";
 import ResponsiveDrawer from "@/components/shared/Sidebar/ResponsiveDrawer";
 import React from "react";
 

@@ -1,4 +1,4 @@
-export const processSpecialNeed = (input: string): String[] => {
+export const processSkillsArray = (input: string): String[] => {
   if (input.trim().toLowerCase() === "none") {
     return ["none"];
   }

@@ -13,6 +13,7 @@ const commonPrivateRoutes = [
 ];
 const roleBasedPrivateRoutes = {
   Admin: [/^\/Dashboard\/Admin/],
+  User: [/^\/Dashboard\/User/],
 };
 
 export function middleware(request: NextRequest) {

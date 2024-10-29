@@ -52,8 +52,8 @@ const OpportunityCard = ({
                 textAlign: "left",
                 marginX: "auto",
                 marginTop: "5px",
-                // maxHeight: "fit-content",
-                height: "430px",
+                // minHeight: "fit-content",
+                height: "450px",
                 alignItems: "center",
                 // backgroundColor: "white",
                 // backgroundColor: "tertiary.main",
@@ -82,30 +82,41 @@ const OpportunityCard = ({
                     outline: "1px  dotted",
                     outlineColor: "secondary.dark",
                     outlineOffset: "5px",
+                    objectFit: "contain",
                   }}
                 >
                   <Image
-                    src={"/volunteer2.png"}
+                    src={opportunity.image[0]}
                     alt={`image`}
                     width={300}
-                    height={0}
+                    height={300}
                     style={{
                       objectFit: "contain",
                       border: "7px solid",
                       borderColor: "secondary.dark",
+                      height: "200px",
                       //   backgroundColor: "#1f2937",
                     }}
                   />
                 </Box>
               </CardMedia>
-              <CardContent
+              <Box
+                height={"50%"}
+                display={"flex"}
+                gap={0.1}
+                paddingLeft={"30px"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"flex-start"}
+                bgcolor={"secondary.main"}
                 sx={{
                   backgroundColor: "secondary.main",
+                  margin: 0,
                   color: "white",
-                  padding: "30px",
+                  // paddingX: "30px",
                 }}
               >
-                <Typography variant="h5" color="primary.dark">
+                <Typography variant="h5" color="primary.dark" fontSize={"20px"}>
                   {opportunity.title}
                 </Typography>
                 <Typography variant="subtitle1" color="tert">
@@ -121,7 +132,7 @@ const OpportunityCard = ({
                     {opportunity.status}
                   </Box>
                 </Typography>
-                <Typography color="white">
+                <Typography color="white" paddingBottom={1}>
                   <LocationOnIcon
                     sx={{
                       mr: "3px",
@@ -131,7 +142,7 @@ const OpportunityCard = ({
                   />
                   {opportunity.location}
                 </Typography>
-              </CardContent>
+              </Box>
               <Box
                 // className="overlay"
                 sx={{

@@ -22,6 +22,8 @@ export interface IOpportunityDataInput {
   description: String;
   location: String;
   organization: String;
+  benefit: string;
+  status: string;
   skillsRequired: String[];
   startDate: Date;
   endDate: Date;

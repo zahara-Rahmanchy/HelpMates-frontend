@@ -18,7 +18,7 @@ const CommonHeader = (props: IProp) => {
         backgroundColor: "rgba(135 35 70)", // Gradient background
         clipPath: "ellipse(69% 100% at 50% 0%)",
         minHeight: "200px",
-        paddingLeft: "50px",
+        paddingLeft: {md: "50px", xs: "20px"},
         paddingY: "60px",
         // padding: {sm: "90px 1px 110px 1px", xs: "100px 1px 150px 1px"},
         textAlign: "left",
@@ -27,7 +27,7 @@ const CommonHeader = (props: IProp) => {
       }}
     >
       <Typography
-        marginLeft={10}
+        marginLeft={{md: 10}}
         textAlign="left"
         fontSize={"14px"}
         color="tertiary.light"
@@ -36,7 +36,7 @@ const CommonHeader = (props: IProp) => {
       </Typography>
       <Typography
         width={"100%"}
-        marginX={10}
+        marginX={{md: 10}}
         textAlign="left"
         variant="h4"
         color="secondary.light"

@@ -63,12 +63,12 @@ const ApplicationButton = ({id, details}: ApplicationButtonProps) => {
           component="a"
           href={`/VolunteerApplication/${id}?title=${details.title}&organization=${details.organization}`}
           sx={{
-            width: "50%",
+            width: {md: "50%", xs: "100%"},
             margin: "0px",
             py: "20px",
             color: "tertiary.light",
             backgroundColor: "secondary.dark",
-            fontSize: "20px",
+            fontSize: {md: "20px", xs: "16px"},
             fontFamily: "bold",
           }}
         >

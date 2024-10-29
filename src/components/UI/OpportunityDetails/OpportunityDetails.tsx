@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import {
   Box,
   Button,
@@ -51,14 +51,15 @@ const OpportunityDetails = ({
           <Stack
             bgcolor={"white"}
             width={"90%"}
-            height={"400px"}
+            height={{md: "400px", xs: "auto"}}
             borderRadius={"10px"}
             marginX={"auto"}
             marginBottom={"50px"}
             marginTop={10}
-            flexDirection={"row"}
+            flexDirection={{md: "row", xs: "column"}}
             justifyContent={"center"}
             alignItems={"center"}
+            paddingY={4}
             gap={5}
           >
             <CardMedia
@@ -66,13 +67,16 @@ const OpportunityDetails = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                // marginTop: "10px",
-                //   backgroundColor: "primary.main",
-                height: "250px",
+                marginTop: "10px",
+                // backgroundColor: "primary.main",
+                height: {md: "200px", xs: "auto"},
               }}
             >
               <Box
+                bgcolor={"red"}
+                marginX={3}
                 sx={{
+                  // marginY: "100px",
                   border: "8px solid", // Adds a solid border
                   borderColor: "secondary.main",
                   outline: "1px  dotted",
@@ -85,10 +89,10 @@ const OpportunityDetails = ({
                   src={"/volunteer4.png"}
                   alt={`image`}
                   width={500}
-                  height={500}
+                  height={200}
                   style={{
                     width: "500px",
-                    height: "300px",
+                    maxHeight: "300px",
                     objectFit: "contain",
                     border: "7px solid",
                     backgroundColor: "secondary.dark",
@@ -98,7 +102,7 @@ const OpportunityDetails = ({
                 />
               </Box>
             </CardMedia>
-            <Box width={{md: "40%", xs: "100%"}}>
+            <Box width={{md: "40%", xs: "100%"}} paddingLeft={{xs: 6, md: 0}}>
               {" "}
               <Typography
                 textAlign="left"
@@ -208,6 +212,20 @@ const OpportunityDetails = ({
               </Typography>
 
               <Typography
+                textAlign="left"
+                marginBottom="15px"
+                // width={"350px"}
+                // maxWidth={"fit-content"}
+                variant="body1"
+                sx={{
+                  fontSize: "16px",
+                  // fontWeight: "bold",
+                }}
+                color="body1"
+              >
+                {opportunity.description}
+              </Typography>
+              <Typography
                 variant="body1"
                 marginTop="3px"
                 marginBottom="15px"
@@ -225,21 +243,6 @@ const OpportunityDetails = ({
                   Status: {""}
                 </Box>
                 {opportunity.status}
-              </Typography>
-
-              <Typography
-                textAlign="left"
-                marginBottom="15px"
-                // width={"350px"}
-                // maxWidth={"fit-content"}
-                variant="body1"
-                sx={{
-                  fontSize: "16px",
-                  // fontWeight: "bold",
-                }}
-                color="body1"
-              >
-                {opportunity.description}
               </Typography>
               <Typography
                 textAlign="left"
@@ -318,10 +321,10 @@ const OpportunityDetails = ({
               {/* age,breed,type box */}
               <hr style={{marginTop: "13px", marginBottom: "20px"}} />
 
-              <Stack direction={"row"} justifyContent={"space-between"}>
+              <Stack direction={"row"} justifyContent={"space-between"} gap={6}>
                 <Typography
                   textAlign="left"
-                  marginRight="120px"
+                  // marginRight="120px"
                   // width={"350px"}
                   // maxWidth={"fit-content"}
                   variant="body1"
@@ -330,6 +333,7 @@ const OpportunityDetails = ({
                     my: "2px",
                     display: {xs: "block", sm: "inline"},
                     // fontWeight: "bold",
+                    textWrap: "wrap",
                   }}
                   color="body1"
                 >
@@ -337,6 +341,7 @@ const OpportunityDetails = ({
                     color="secondary.dark"
                     component="span"
                     fontWeight="bold"
+                    // sx={{textWrap: "nowrap"}}
                   >
                     Starting Date:{" "}
                   </Box>
@@ -366,10 +371,15 @@ const OpportunityDetails = ({
                   {dayjs(opportunity.startDate).format("hh:mm A")}
                 </Typography>
               </Stack>
-              <Stack direction={"row"} justifyContent={"space-between"}>
+              <Stack
+                direction={"row"}
+                justifyContent={"space-between"}
+                gap={6}
+                marginY={2}
+              >
                 <Typography
                   textAlign="left"
-                  marginRight="60px"
+                  // marginRight="60px"
                   // width={"350px"}
                   // maxWidth={"fit-content"}
                   variant="body1"
