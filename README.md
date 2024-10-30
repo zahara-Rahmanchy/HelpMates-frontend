@@ -4,13 +4,13 @@
 
 ### Tech Stack
 
-Frontend
+-Frontend
 
 - Typescript
 - Next JS
 - Material UI
 - Redux
-  Backend
+  -Backend
 - Express JS
 - Node JS
 - Postgres

@@ -30,8 +30,8 @@ instance.interceptors.response.use(
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
-    // return response;
-    return responseObj;
+    return response;
+    // return responseObj;
   },
   function (error) {
     console.log("error : ", error);

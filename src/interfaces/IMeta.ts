@@ -5,6 +5,6 @@ export type IMeta = {
 };
 
 export type ResponseSuccessType = {
-  data: any;
-  meta: IMeta;
+  data?: any;
+  meta?: IMeta;
 };
