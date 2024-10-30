@@ -5,8 +5,7 @@ import getEnvVariable from "@/utils/getEnvVariable";
 interface EditData {
   name?: string;
   email?: string;
-  role?: string;
-  active?: boolean;
+  contactNumber?: string;
 }
 const EditUserProfile = async (
   editData: EditData,
@@ -17,6 +16,7 @@ const EditUserProfile = async (
     ...editData,
     id: id,
   };
+  console.log("data: ", data);
   try {
     const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
     const res = await fetch(`${url}/profile`, {

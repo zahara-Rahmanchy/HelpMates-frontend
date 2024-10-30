@@ -144,6 +144,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
   return (
     <Box
       maxWidth={"100%"}
+      marginBottom={30}
       sx={{
         // backgroundColor: "grey",
         padding: "50px",
@@ -413,7 +414,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
             //
             //
             <Typography textAlign={"center"} fontSize={"20px"}>
-              No pet data
+              No opportunities
             </Typography>
           )}{" "}
         </Grid>

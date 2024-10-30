@@ -86,7 +86,7 @@ const OpportunityDetails = ({
                 }}
               >
                 <Image
-                  src={"/volunteer4.png"}
+                  src={opportunity?.image[0] || "volunteer4.png"}
                   alt={`image`}
                   width={500}
                   height={200}
@@ -280,20 +280,23 @@ const OpportunityDetails = ({
               </Grid>
               <Typography
                 textAlign="left"
-                // width={"350px"}
-                // maxWidth={"fit-content"}
+                marginY="15px"
                 variant="body1"
                 sx={{
-                  fontSize: "18px",
-                  my: "2px",
+                  fontSize: "16px",
                   // fontWeight: "bold",
                 }}
                 color="body1"
               >
-                <Box color="secondary.dark" component="span" fontWeight="bold">
-                  Benefits:{" "}
-                </Box>{" "}
-                {/* {pet.temperament} */}
+                <Box
+                  color="secondary.dark"
+                  marginRight={1}
+                  component="span"
+                  fontWeight="bold"
+                >
+                  Benefits:
+                </Box>
+                {opportunity?.benefit}
               </Typography>
               <Typography
                 textAlign="left"

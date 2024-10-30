@@ -22,7 +22,12 @@ export default function ResponsiveDrawer({
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  const userInfo = getUserInfo();
+  const [role, setRole] = React.useState("");
+  React.useEffect(() => {
+    const {role} = getUserInfo() as any;
+
+    setRole(role);
+  }, []);
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -63,7 +68,7 @@ export default function ResponsiveDrawer({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            {userInfo?.role === "Admin" ? "Admin" : "User"}
+            {role === "Admin" ? "Admin" : "User"}
           </Typography>
         </Toolbar>
       </AppBar>

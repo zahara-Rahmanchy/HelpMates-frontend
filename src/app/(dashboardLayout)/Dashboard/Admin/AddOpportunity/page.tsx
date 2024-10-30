@@ -46,24 +46,24 @@ const AddOpportunityPage = () => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     setImageLoading(true);
-    console.log(data);
+    // console.log(data);
     const {image, startDate, endDate, skillsRequired, ...rest} = data;
     const startDateString = startDate.toISOString(); // Converts to ISO string
     const endDateString = endDate.toISOString();
     const skillsRequiredArr = processSkillsArray(skillsRequired);
-    console.log(
-      "dates: ",
-      startDateString,
-      endDateString,
-      "arr: ",
-      skillsRequiredArr
-    );
+    // console.log(
+    //   "dates: ",
+    //   startDateString,
+    //   endDateString,
+    //   "arr: ",
+    //   skillsRequiredArr
+    // );
     /**************** Generating image urls************************* */
     const imgFiles = Object.values(image);
 
     const urls = imgFiles.map((file, index) => uploadImage(file));
     const allImageUrls = await Promise.all(urls);
-    console.log("allurls: ", allImageUrls);
+    // console.log("allurls: ", allImageUrls);
     setImageLoading(false);
     setLoading(true);
     /**************** endGenerating image urls************************* */
@@ -77,12 +77,12 @@ const AddOpportunityPage = () => {
       };
       // console.log("insertData: ", insertData);
       const res = await insertOpportunityData(insertData).unwrap();
-      console.log("res: ", res);
+      // console.log("res: ", res);
       if (res?.id) {
         toast.success("New Opportunity added successfully");
         reset();
       } else {
-        console.log("error: ", res.message);
+        // console.log("error: ", res.message);
         toast.error(res.message);
       }
     } catch (err: any) {
@@ -267,15 +267,18 @@ const AddOpportunityPage = () => {
                             },
                           }}
                           {...field}
-                          renderInput={(props: any) => (
-                            <TextField
-                              {...props}
-                              helperText="invalid mask"
-                              {...register("startDate", {
-                                required: "Starting Date and Time is required!",
-                              })}
-                            />
-                          )}
+                          slots={{
+                            textField: params => (
+                              <TextField
+                                {...params}
+                                helperText="invalid mask"
+                                {...register("startDate", {
+                                  required:
+                                    "Starting Date and Time is required!",
+                                })}
+                              />
+                            ),
+                          }}
                         />
                       </LocalizationProvider>
                     )}
@@ -307,37 +310,39 @@ const AddOpportunityPage = () => {
                           }}
                           label="Ending Date and Time"
                           {...field}
-                          renderInput={(props: any) => (
-                            <TextField
-                              {...props}
-                              id="standard-basic"
-                              label="Starting Date and Time"
-                              variant="standard"
-                              fullWidth={true}
-                              sx={{
-                                "& .MuiInputBase-root": {
-                                  border: "none", // Remove the border
-                                },
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  border: "none", // Remove the border for outlined variant
-                                },
-                                "& .MuiInput-underline:before": {
-                                  borderBottom: "none", // Remove the underline on focus
-                                },
-                                "& .MuiInput-underline:after": {
-                                  borderBottom: "none", // Remove the underline after focus
-                                },
-                                "& .MuiInputBase-input-MuiOutlinedInput-input":
-                                  {
-                                    paddingX: "0px",
-                                    marginX: "0px",
+                          slots={{
+                            textField: params => (
+                              <TextField
+                                {...params}
+                                id="standard-basic"
+                                label="Starting Date and Time"
+                                variant="standard"
+                                fullWidth={true}
+                                sx={{
+                                  "& .MuiInputBase-root": {
+                                    border: "none", // Remove the border
                                   },
-                              }}
-                              {...register("startDate", {
-                                required: "Starting Date and Time is required!",
-                              })}
-                            />
-                          )}
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    border: "none", // Remove the border for outlined variant
+                                  },
+                                  "& .MuiInput-underline:before": {
+                                    borderBottom: "none", // Remove the underline on focus
+                                  },
+                                  "& .MuiInput-underline:after": {
+                                    borderBottom: "none", // Remove the underline after focus
+                                  },
+                                  "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                    {
+                                      paddingX: "0px",
+                                      marginX: "0px",
+                                    },
+                                }}
+                                {...register("endDate", {
+                                  required: "Ending Date and Time is required!",
+                                })}
+                              />
+                            ),
+                          }}
                         />
                       </LocalizationProvider>
                     )}

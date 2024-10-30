@@ -93,8 +93,11 @@ const EditOpportunityData: FC<IEditProps> = ({
 
     console.log("upd data:", data);
     const {image, startDate, endDate, skillsRequired, ...rest} = data;
-    const startDateString = startDate?.toISOString(); // Converts to ISO string
-    const endDateString = endDate?.toISOString();
+    console.log("endDate: ", endDate);
+    const startDateString = startDate !== "" ? dayjs(startDate) : "";
+    const endDateString = endDate !== "" ? dayjs(endDate).toISOString() : "";
+    // const startDateString = startDate?.toISOString(); // Converts to ISO string
+    // const endDateString = endDate?.toISOString();
 
     let skillsRequiredArr;
     if (skillsRequired) {
@@ -228,312 +231,278 @@ const EditOpportunityData: FC<IEditProps> = ({
                     in Opportunity Information
                   </Box>
                 </Typography>
-                <form onSubmit={handleSubmit(onSubmit)}>
-                  <Grid
-                    container
-                    spacing={2}
-                    gap={2}
-                    px={4}
-                    py={5}
-                    width="100%"
-                    justifyContent={"center"}
-                  >
-                    <Grid item xs={12} md={4}>
-                      <TextField
-                        id="standard-basic"
-                        label={`Organization : ${opportunityData.organization}`}
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("organization", {
-                          // required: "Organization name is required!",
-                        })}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <TextField
-                        id="standard-basic"
-                        label={`Volunteering Title: ${opportunityData.title}`}
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("title", {})}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={3}>
-                      <TextField
-                        id="standard-basic"
-                        label={`Location: ${opportunityData.location}`}
-                        variant="standard"
-                        type="text"
-                        fullWidth={true}
-                        {...register("location", {})}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12} md={5}>
-                      <TextField
-                        type="textarea"
-                        id="standard-basic"
-                        sx={{height: "100px"}}
-                        // defaultValue={petData.description}
-                        label={`Description: ${desc}`}
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("description", {
-                          //required: "description is //required!",
-                        })}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton
-                                style={{color: "purple"}}
-                                aria-describedby={
-                                  view ? "simple-popover" : undefined
-                                }
-                                // variant="contained"
-                                onClick={event =>
-                                  setAnchorEl(event.currentTarget)
-                                }
-                              >
-                                {<Visibility />}
-                              </IconButton>
-                              <Popover
-                                id={view ? "simple-popover" : undefined}
-                                open={view}
-                                anchorEl={anchorEl}
-                                onClose={() => setAnchorEl(null)}
-                                anchorOrigin={{
-                                  vertical: "top",
-                                  horizontal: "left",
-                                }}
-                              >
-                                <Typography sx={{p: 2}}>
-                                  {opportunityData.description}
-                                </Typography>
-                              </Popover>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={6}>
-                      <TextField
-                        id="standard-basic"
-                        label={`Skills (comma separated / none): ${opportunityData.skillsRequired}`}
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("skillsRequired", {})}
-                      />
-                      {/* {errors.specialNeed && (
-                  <span className="text-red-500 text-xs m-1">
-                    {errors.specialNeed.message}
-                  </span>
-                )} */}
-                    </Grid>
-
+                {opportunityData ? (
+                  <form onSubmit={handleSubmit(onSubmit)}>
                     <Grid
-                      item
-                      // bgcolor={"red"}
-                      xs={12}
-                      md={3}
-                      // justifyContent={"flex-start"}
-                      // alignItems={"flex-start"}
-                      // borderBottom="1px solid"
-                      marginLeft={1}
-                      textAlign={"left"}
-                      // bgcolor={"wheat"}
+                      container
+                      spacing={2}
+                      gap={2}
+                      px={4}
+                      py={5}
+                      width="100%"
+                      justifyContent={"center"}
                     >
-                      <Controller
-                        name="startDate"
-                        control={control}
-                        // style={{width = "100%"}}
-                        // defaultValue={dayjs()}
-                        render={({field}) => (
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                              orientation="landscape"
-                              label={`Start: ${dayjs(
-                                opportunityData.startDate
-                              ).format("hh:mm A , D/MM/YY")}`}
-                              sx={{
-                                width: "100%",
-                                textAlign: "left",
-                                margin: "0px",
-                                padding: "0px",
-                                alignItems: "flex-start",
-                                gap: 6,
-                                borderBottom: "1px solid grey",
+                      <Grid item xs={12} md={4}>
+                        <TextField
+                          id="standard-basic"
+                          label={`Organization : ${opportunityData.organization}`}
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("organization", {
+                            // required: "Organization name is required!",
+                          })}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={4}>
+                        <TextField
+                          id="standard-basic"
+                          label={`Volunteering Title: ${opportunityData.title}`}
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("title", {})}
+                        />
+                      </Grid>
 
-                                "& .MuiInputBase-root": {
-                                  border: "none",
-                                  // Remove the border
-                                  borderRadius: "0px",
-                                  padding: 0,
-                                  margin: "0px",
-                                },
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  border: "none",
-                                  margin: "0px",
-                                  padding: 0,
-                                },
-                              }}
-                              {...field}
-                              renderInput={(props: any) => (
-                                <TextField
-                                  {...props}
-                                  helperText="invalid mask"
-                                  {...register("startDate", {
-                                    required:
-                                      "Starting Date and Time is required!",
-                                  })}
-                                />
-                              )}
-                            />
-                          </LocalizationProvider>
-                        )}
-                      />
-                    </Grid>
+                      <Grid item xs={12} md={3}>
+                        <TextField
+                          id="standard-basic"
+                          label={`Location: ${opportunityData.location}`}
+                          variant="standard"
+                          type="text"
+                          fullWidth={true}
+                          {...register("location", {})}
+                        />
+                      </Grid>
 
-                    <Grid item xs={12} md={3}>
-                      <Controller
-                        name="endDate"
-                        control={control}
-                        // defaultValue={dayjs()}
-                        render={({field}) => (
-                          <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DateTimePicker
-                              label={`End: ${dayjs(
-                                opportunityData.endDate
-                              ).format("hh:mm A , D/MM/YY")}`}
-                              orientation="landscape"
-                              sx={{
-                                width: "100%",
-                                textAlign: "left",
-                                margin: "0px",
-                                padding: "0px",
-                                alignItems: "flex-start",
-                                borderBottom: "1px solid grey",
-                                "& .MuiInputBase-root": {
-                                  border: "none", // Remove the border
-                                },
-                                "& .MuiOutlinedInput-notchedOutline": {
-                                  border: "none", // Remove the border for outlined variant
-                                },
-                              }}
-                              {...field}
-                              renderInput={(props: any) => (
-                                <TextField
-                                  {...props}
-                                  id="standard-basic"
-                                  label=" Date and Time"
-                                  variant="standard"
-                                  fullWidth={true}
-                                  sx={{
-                                    "& .MuiInputBase-root": {
-                                      border: "none", // Remove the border
-                                    },
-                                    "& .MuiOutlinedInput-notchedOutline": {
-                                      border: "none", // Remove the border for outlined variant
-                                    },
-                                    "& .MuiInput-underline:before": {
-                                      borderBottom: "none", // Remove the underline on focus
-                                    },
-                                    "& .MuiInput-underline:after": {
-                                      borderBottom: "none", // Remove the underline after focus
-                                    },
-                                    "& .MuiInputBase-input-MuiOutlinedInput-input":
-                                      {
-                                        paddingX: "0px",
-                                        marginX: "0px",
-                                      },
+                      <Grid item xs={12} md={5}>
+                        <TextField
+                          type="textarea"
+                          id="standard-basic"
+                          sx={{height: "100px"}}
+                          // defaultValue={petData.description}
+                          label={`Description: ${desc}`}
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("description", {
+                            //required: "description is //required!",
+                          })}
+                          InputProps={{
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <IconButton
+                                  style={{color: "purple"}}
+                                  aria-describedby={
+                                    view ? "simple-popover" : undefined
+                                  }
+                                  // variant="contained"
+                                  onClick={event =>
+                                    setAnchorEl(event.currentTarget)
+                                  }
+                                >
+                                  {<Visibility />}
+                                </IconButton>
+                                <Popover
+                                  id={view ? "simple-popover" : undefined}
+                                  open={view}
+                                  anchorEl={anchorEl}
+                                  onClose={() => setAnchorEl(null)}
+                                  anchorOrigin={{
+                                    vertical: "top",
+                                    horizontal: "left",
                                   }}
-                                  {...register("startDate", {
-                                    required:
-                                      "Starting Date and Time is required!",
-                                  })}
-                                />
-                              )}
-                            />
-                          </LocalizationProvider>
-                        )}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={5}>
-                      <TextField
-                        id="standard-basic"
-                        label="Benefits/Rewards"
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("benefit", {
-                          // required: "benefits is required!",
-                        })}
-                      />
-                      {/* {errors.temperament && (
+                                >
+                                  <Typography sx={{p: 2}}>
+                                    {opportunityData.description}
+                                  </Typography>
+                                </Popover>
+                              </InputAdornment>
+                            ),
+                          }}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={6}>
+                        <TextField
+                          id="standard-basic"
+                          label={`Skills (comma separated / none): ${opportunityData.skillsRequired}`}
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("skillsRequired", {})}
+                        />
+                      </Grid>
+
+                      <Grid
+                        item
+                        // bgcolor={"red"}
+                        xs={12}
+                        md={3}
+                        marginLeft={1}
+                        textAlign={"left"}
+                        // bgcolor={"wheat"}
+                      >
+                        <Controller
+                          name="startDate"
+                          control={control}
+                          // style={{width = "100%"}}
+                          // defaultValue={dayjs()}
+                          render={({field}) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateTimePicker
+                                orientation="landscape"
+                                {...field}
+                                slots={{
+                                  textField: params => (
+                                    <TextField
+                                      {...params}
+                                      label={`Start: ${dayjs(
+                                        opportunityData.startDate
+                                      ).format("hh:mm A , D MMM, YY")}`}
+                                      variant="standard"
+                                      fullWidth={true}
+                                      sx={{
+                                        "& .MuiInputBase-root": {
+                                          borderBottom: "1x solid grey", // Remove the border
+                                        },
+                                        "& .MuiOutlinedInput-notchedOutline": {
+                                          borderBottom: "1px solid grey", // Remove the border for outlined variant
+                                        },
+
+                                        "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                          {
+                                            paddingX: "0px",
+                                            marginX: "0px",
+                                          },
+                                      }}
+                                      {...register("startDate")}
+                                    />
+                                  ),
+                                }}
+                              />
+                            </LocalizationProvider>
+                          )}
+                        />
+                      </Grid>
+
+                      <Grid item xs={12} md={3}>
+                        <Controller
+                          name="endDate"
+                          control={control}
+                          // defaultValue={dayjs()}
+                          render={({field}) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateTimePicker
+                                {...field}
+                                slots={{
+                                  textField: params => (
+                                    <TextField
+                                      {...params}
+                                      id="standard-basic"
+                                      label={`End: ${dayjs(
+                                        opportunityData.endDate
+                                      ).format("hh:mm A , D MMM, YY")}`}
+                                      variant="standard"
+                                      fullWidth={true}
+                                      sx={{
+                                        "& .MuiInputBase-root": {
+                                          borderBottom: "1px solid grey", // Remove the border
+                                        },
+                                        "& .MuiOutlinedInput-notchedOutline": {
+                                          borderBottom: "1px solid grey", // Remove the border for outlined variant
+                                        },
+
+                                        "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                          {
+                                            paddingX: "0px",
+                                            marginX: "0px",
+                                          },
+                                      }}
+                                      {...register("endDate")}
+                                    />
+                                  ),
+                                }}
+                              />
+                            </LocalizationProvider>
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={5}>
+                        <TextField
+                          id="standard-basic"
+                          label="Benefits/Rewards"
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("benefit", {
+                            // required: "benefits is required!",
+                          })}
+                        />
+                        {/* {errors.temperament && (
                   <span className="text-red-500 text-xs m-1">
                     {errors.temperament.message}
                   </span>
                 )} */}
-                    </Grid>
+                      </Grid>
 
-                    <Grid item xs={12} md={3}>
-                      <TextField
-                        id="standard-basic"
-                        label={`Status: ${opportunityData.status}`}
-                        variant="standard"
-                        fullWidth={true}
-                        {...register("status", {
-                          //required: "medicalHistory is //required!",
-                        })}
-                      />
-                    </Grid>
-
-                    <Grid
-                      item
-                      xs={12}
-                      md={6}
-                      // bgcolor={"blue"}
-                      // alignItems={"flex-end"}
-                      sx={{borderBottom: "1px solid grey"}}
-                      padding={2}
-                    >
-                      <input
-                        style={{borderBottom: "4px", borderColor: "black"}}
-                        id="standard-basic"
-                        // label="image"
-                        type="file"
-                        multiple
-                        // variant="standard"
-                        // fullWidth={true}
-                        {...register("image", {
-                          //required: "image is //required!",
-                        })}
-                      />
-                      {errors.image && (
-                        <span className="text-red-500 text-xs m-1">
-                          {errors.image.message}
-                        </span>
-                      )}
-                      {imageLoading && (
-                        <LinearProgress
-                          color="primary"
-                          sx={{marginTop: "5px"}}
+                      <Grid item xs={12} md={3}>
+                        <TextField
+                          id="standard-basic"
+                          label={`Status: ${opportunityData.status}`}
+                          variant="standard"
+                          fullWidth={true}
+                          {...register("status", {
+                            //required: "medicalHistory is //required!",
+                          })}
                         />
-                      )}
+                      </Grid>
+
+                      <Grid
+                        item
+                        xs={12}
+                        md={6}
+                        // bgcolor={"blue"}
+                        // alignItems={"flex-end"}
+                        sx={{borderBottom: "1px solid grey"}}
+                        padding={2}
+                      >
+                        <input
+                          style={{borderBottom: "4px", borderColor: "black"}}
+                          id="standard-basic"
+                          // label="image"
+                          type="file"
+                          multiple
+                          // variant="standard"
+                          // fullWidth={true}
+                          {...register("image", {
+                            //required: "image is //required!",
+                          })}
+                        />
+                        {errors.image && (
+                          <span className="text-red-500 text-xs m-1">
+                            {errors.image.message}
+                          </span>
+                        )}
+                        {imageLoading && (
+                          <LinearProgress
+                            color="primary"
+                            sx={{marginTop: "5px"}}
+                          />
+                        )}
+                      </Grid>
                     </Grid>
-                  </Grid>
-                  <Button
-                    // textAlign="center"
-                    disabled={loading || imageLoading}
-                    sx={{
-                      width: "200px",
-                      textAlign: "center",
-                      marginBottom: 5,
-                    }}
-                    type="submit"
-                  >
-                    Add
-                  </Button>
-                </form>
+                    <Button
+                      // textAlign="center"
+                      disabled={loading || imageLoading}
+                      sx={{
+                        width: "200px",
+                        textAlign: "center",
+                        marginBottom: 5,
+                      }}
+                      type="submit"
+                    >
+                      Update
+                    </Button>
+                  </form>
+                ) : (
+                  "No data,please reopen"
+                )}
               </Box>
             </Stack>
           </Container>

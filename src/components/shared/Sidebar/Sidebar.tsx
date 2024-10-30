@@ -1,3 +1,4 @@
+"use client";
 import {
   Box,
   Divider,
@@ -9,8 +10,11 @@ import {
   Toolbar,
 } from "@mui/material";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import PetsIcon from "@mui/icons-material/Pets";
+import ManageHistoryOutlinedIcon from "@mui/icons-material/ManageHistoryOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import DashboardCustomizeOutlinedIcon from "@mui/icons-material/DashboardCustomizeOutlined";
+import HomeWorkOutlinedIcon from "@mui/icons-material/HomeWorkOutlined";
+
 import React, {useEffect, useState} from "react";
 import Logo from "../Navbar/Logo";
 import Link from "next/link";
@@ -21,6 +25,7 @@ export const SideBar = () => {
   const [role, setRole] = useState("");
   useEffect(() => {
     const {role} = getUserInfo() as any;
+
     setRole(role);
   }, []);
   const drawer = (
@@ -48,7 +53,7 @@ export const SideBar = () => {
               }}
             >
               <ListItemIcon>
-                <InboxIcon />
+                <HomeWorkOutlinedIcon />
               </ListItemIcon>
               <ListItemText
                 primary="Home"
@@ -68,7 +73,7 @@ export const SideBar = () => {
           >
             <ListItemButton>
               <ListItemIcon>
-                <PeopleAltTwoTone />
+                <DashboardCustomizeOutlinedIcon />
               </ListItemIcon>
               <ListItemText
                 primary={"Dashboard"}
@@ -116,7 +121,7 @@ export const SideBar = () => {
           >
             <ListItemButton>
               <ListItemIcon>
-                <PetsIcon />
+                <AddBoxOutlinedIcon />
               </ListItemIcon>
               <ListItemText
                 primary={
@@ -153,8 +158,7 @@ export const SideBar = () => {
           >
             <ListItemButton>
               <ListItemIcon>
-                <PetsIcon fontSize="small" />
-                <PetsIcon fontSize="small" />
+                <ManageHistoryOutlinedIcon />
               </ListItemIcon>
               <ListItemText
                 primary={

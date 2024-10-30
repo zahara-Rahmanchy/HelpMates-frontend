@@ -20,7 +20,11 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 import Link from "next/link";
 import {convertDuration} from "@/utils/convertDuration";
+import utc from "dayjs/plugin/utc"; // Import UTC plugin
+import timezone from "dayjs/plugin/timezone"; // Import timezone plugin
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
 const OpportunityCard = ({
   opportunities,
 }: {
@@ -224,16 +228,16 @@ const OpportunityCard = ({
                           }}
                         />
                         End Date:{" "}
-                        {dayjs(opportunity.endDate).format(
-                          "hh:mm A - MMM D, YYYY"
-                        )}
+                        {dayjs(opportunity.endDate)
+                          .tz("Asia/Dhaka")
+                          .format("hh:mm A - MMM D, YYYY")}
                       </Typography>
                     </ListItem>
                     <ListItem>
                       <Typography textAlign={"left"} color="tertiary.main">
                         {" "}
                         {opportunity.description.length > 100
-                          ? `${opportunity.description.slice(0, 100)} ...`
+                          ? `${opportunity.description.slice(0, 150)} ...`
                           : opportunity.description}
                       </Typography>
                     </ListItem>

@@ -14,6 +14,7 @@ import {DeleteSweep, EditNoteRounded} from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import {
   AppBar,
+  Backdrop,
   Box,
   Button,
   CircularProgress,
@@ -36,7 +37,7 @@ import Link from "next/link";
 import React, {useEffect, useState} from "react";
 import {toast} from "sonner";
 
-const ManagePetPage = () => {
+const ManageOpportunityPage = () => {
   const [open, setOpen] = useState(false);
   const [adoptData, setAdoptData] = useState([]);
   const {
@@ -47,43 +48,23 @@ const ManagePetPage = () => {
 
   const [deleteOpportunityData] = useDeleteOpportunityDataMutation();
   if (error) {
-    console.log(error);
+    // console.log(error);
     toast.error("Something went wrong!");
   }
-  console.log("oppor: ", opportunityData);
-  const accessToken = getFromCookiesClient(authKey);
-  // const fetchPets = async () => {
-  //   const res = await fetch(
-  //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/detailed-pets`,
-  //     {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: accessToken ? accessToken : "",
-  //       },
-  //       cache: "no-store",
-  //     }
-  //   );
-  //   const data = await res.json();
-  //   // console.log("pet data: ", data);
-  //   setPets(data.data);
-  // };
+  // console.log("oppor: ", opportunityData);
 
   //   handle edit
-  const handleEdit = async (adoptionRequests: any) => {
-    setOpen(true);
-    setAdoptData(adoptionRequests);
+  const handleEdit = async (event: any, adoptionRequests: any) => {
+    event.preventDefault();
+    if (adoptionRequests) {
+      setOpen(true);
+      setAdoptData(adoptionRequests);
+    }
   };
 
   const handleDeleteOpportunity = async (id: string) => {
     const confirmed = confirm("Are you sure you want to delete the data?");
-    console.log(
-      "delete id: ",
-      id,
-      "conf: ",
-      confirmed,
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/pet/${id}`
-    );
+
     if (confirmed) {
       // const res = await fetch(
       //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/pet/${id}`,
@@ -102,20 +83,28 @@ const ManagePetPage = () => {
           id,
         }).unwrap();
 
-        console.log("res: ", res);
+        // console.log("res: ", res);
         if (res?.id) {
           toast.success("Opportunity Data updated Successfully!");
         }
       } catch (error: any) {
-        if (error?.data)
-          toast.success("Opportunity Data updated Successfully!");
+        if (error?.data) toast.error(error?.data);
         else toast.error("Something went wrong!");
       }
     }
   };
   return (
     <Container>
-      <TableContainer component={Paper} sx={{overflowX: "scroll"}}>
+      <Backdrop
+        sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
+        open={isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Typography component={"h5"} margin={3} fontSize={"20px"}>
+        Manage Volunteering Opportunites: View, Update or Delete
+      </Typography>
+      <TableContainer component={Paper} sx={{overflow: "scroll"}}>
         <Table
           sx={{
             backgroundColor: "white",
@@ -150,11 +139,11 @@ const ManagePetPage = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {isLoading && (
+            {/* {isLoading && (
               <CircularProgress
                 sx={{textAlign: "center", width: "100%", margin: "auto 0"}}
               />
-            )}
+            )} */}
             {opportunityData &&
               opportunityData.map((value: any, key: number) => (
                 <TableRow key={key}>
@@ -280,14 +269,16 @@ const ManagePetPage = () => {
                     <Button
                       sx={{
                         color: "blue",
+                        width: "20px",
                         backgroundColor: "transparent",
                         boxShadow: "none",
                         ":hover": {
-                          backgroundColor: "secondary.dark",
-                          color: "white",
+                          backgroundColor: "transparent",
+                          color: "secondary.dark",
+                          boxShadow: "none",
                         },
                       }}
-                      onClick={() => handleEdit(value)}
+                      onClick={event => handleEdit(event, value)}
                       //   component={Link}
                       //   href={`PetPortfolio/${value?.pet?.id}`}
                       size="small"
@@ -327,4 +318,4 @@ const ManagePetPage = () => {
   );
 };
 
-export default ManagePetPage;
+export default ManageOpportunityPage;

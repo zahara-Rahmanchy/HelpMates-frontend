@@ -95,10 +95,9 @@ const ChangePassword = () => {
       </Typography>
       <Stack
         // bgcolor={"#eed4f9"}
-        bgcolor={"secondary.light"}
+        bgcolor={"white"}
         width={"100%"}
         borderRadius={"20px"}
-        marginBottom={10}
         py={{sm: 2, xs: 6}}
         minHeight={"200px"}
         // alignItems={"center"}
@@ -201,7 +200,7 @@ const ChangePassword = () => {
                 width: "200px",
                 textAlign: "center",
                 mx: "auto 0",
-                bgcolor: "#865C97",
+                bgcolor: "secondary.main",
               }}
               type="submit"
             >

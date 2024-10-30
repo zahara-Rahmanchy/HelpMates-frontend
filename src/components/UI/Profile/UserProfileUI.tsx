@@ -34,7 +34,7 @@ const UserProfileUI = ({profile}: {profile: IProfile}) => {
         gap={2}
         direction={{xs: "column", sm: "row"}}
         sx={{
-          backgroundColor: "#eed4f9",
+          // backgroundColor: "white",
           borderRadius: "30px",
           // margin: "10px",
         }}
@@ -45,11 +45,17 @@ const UserProfileUI = ({profile}: {profile: IProfile}) => {
         <AccountCircleRounded
           // fontSize="large"
           sx={{
+            bgcolor: "secondary.dark",
+            color: "white",
             fontSize: "100px",
           }}
         />
         <Box color={"black"}>
-          <Typography color={"black"} fontSize={"18px"} fontWeight={"bold"}>
+          <Typography
+            color={"primary.main"}
+            fontSize={"18px"}
+            fontWeight={"bold"}
+          >
             {profile?.name}
           </Typography>
           <Typography color="primary.main">Email: {profile?.email}</Typography>
@@ -63,7 +69,7 @@ const UserProfileUI = ({profile}: {profile: IProfile}) => {
           width: "200px",
           textAlign: "center",
           marginBottom: 5,
-          bgcolor: "#865C97",
+          bgcolor: "secondary.dark",
         }}
         onClick={handleClick}
       >

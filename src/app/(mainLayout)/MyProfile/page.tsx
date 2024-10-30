@@ -27,7 +27,7 @@ const ProfilePage = async () => {
   // console.log(profile);
 
   return (
-    <>
+    <Box bgcolor={"tertiary.light"} paddingBottom={20}>
       <hr style={{borderColor: "#FFEDC4", marginBottom: "40px"}} />
       <Container>
         <Typography
@@ -48,7 +48,7 @@ const ProfilePage = async () => {
 
         <Stack
           marginTop={2}
-          sx={{backgroundColor: "#f4e0fc", borderRadius: "30px"}}
+          sx={{backgroundColor: "secondary.light", borderRadius: "30px"}}
           direction={{xs: "column", sm: "row"}}
           // justifyContent={"space-evenly"}
           alignItems={"center"}
@@ -59,7 +59,7 @@ const ProfilePage = async () => {
             minHeight={"200px"}
             direction={{xs: "column", sm: "row"}}
             sx={{
-              backgroundColor: "#eed4f9",
+              // backgroundColor: "white",
               borderRadius: "30px",
               margin: {sm: "10px", xs: "0px"},
               padding: {sm: "0px", xs: "30px"},
@@ -80,26 +80,8 @@ const ProfilePage = async () => {
         <Box>
           <ChangePassword />
         </Box>
-        <Typography
-          width={"100%"}
-          mx={{sm: 4, xs: 2}}
-          my={4}
-          textAlign="left"
-          variant="h4"
-          color="primary.main"
-          // component="span"
-          fontWeight={"bold"}
-          // fontSize={"30px"}
-        >
-          My Adop
-          <Box color="black" component="span">
-            ted Paws
-          </Box>
-        </Typography>
-        {/* accessToken={accessToken as string} */}
-        <AdoptedPetTable />
       </Container>
-    </>
+    </Box>
   );
 };
 

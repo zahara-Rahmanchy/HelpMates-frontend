@@ -23,7 +23,7 @@ const tableHeads = [
   "User Name",
   "Email",
   "Contact",
-  "Adoption Status",
+  "Status",
   "Accept",
   "Reject",
 ];
@@ -88,7 +88,7 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
       >
         Application Requests
       </Typography>
-      {volunteerRequests !== undefined ? (
+      {volunteerRequests !== undefined || volunteerRequests !== "" ? (
         <TableContainer component={Paper}>
           <Table
             sx={{lg: {minWidth: 650}, xs: {minWidth: "100%"}}}

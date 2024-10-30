@@ -37,14 +37,14 @@ const EditProfile: FC<props> = ({accessToken}) => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     setLoading(true);
-    // console.log(data);
+    console.log(data);
 
     for (let key in data) {
       if (data[key] === "" || data[key] === undefined || data[key] === null)
         delete data[key];
     }
 
-    // console.log("Sanitized", data);
+    console.log("Sanitized", data);
     try {
       const res = await EditUserProfile(data, accessToken, userInfo?.id);
       // console.log(res);
@@ -54,6 +54,8 @@ const EditProfile: FC<props> = ({accessToken}) => {
         router.refresh();
 
         toast.success(res?.message);
+      } else {
+        toast.error("Something went wrong!");
       }
     } catch (err) {
       console.log(err);
@@ -90,14 +92,11 @@ const EditProfile: FC<props> = ({accessToken}) => {
           <Typography
             textAlign="center"
             variant="h6"
-            color="primary.main"
+            color="primary.dark"
             component="span"
             fontWeight={"bold"}
           >
-            Edit <Box component="span"></Box>
-            <Box color="black" component="span">
-              Profile
-            </Box>
+            Edit Profile
           </Typography>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid
@@ -111,7 +110,11 @@ const EditProfile: FC<props> = ({accessToken}) => {
             >
               <Grid item xs={12} md={12}>
                 <TextField
-                  sx={{color: "white"}}
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      color: "white", // Label color
+                    },
+                  }}
                   id="standard-basic"
                   label="Username"
                   variant="standard"
@@ -122,6 +125,11 @@ const EditProfile: FC<props> = ({accessToken}) => {
 
               <Grid item xs={12}>
                 <TextField
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      color: "white", // Label color
+                    },
+                  }}
                   id="standard-basic"
                   label="Email"
                   variant="standard"
@@ -130,14 +138,27 @@ const EditProfile: FC<props> = ({accessToken}) => {
                   {...register("email")}
                 />
               </Grid>
-              <Grid item xs={12} textAlign="center"></Grid>
+              <Grid item xs={12} md={12}>
+                <TextField
+                  sx={{
+                    "& .MuiInputLabel-root": {
+                      color: "white", // Label color
+                    },
+                  }}
+                  id="standard-basic"
+                  label="Contact"
+                  variant="standard"
+                  fullWidth={true}
+                  {...register("contactNumber")}
+                />
+              </Grid>
             </Grid>
             <Button
               sx={{
                 width: "200px",
                 textAlign: "center",
                 marginBottom: 5,
-                bgcolor: "#f7ad1b",
+                bgcolor: "primary.main",
               }}
               type="submit"
             >
