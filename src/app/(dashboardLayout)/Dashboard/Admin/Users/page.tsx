@@ -1,16 +1,11 @@
 "use client";
-import EditPetData from "@/components/UI/Dashboard/Pets/EditOpportunityData";
-import {authKey} from "@/constants/authkey";
 
 import {usersTableHeads} from "@/constants/usersTableHeads";
 import {
   useGetAllUsersQuery,
   useUpdateUserDataMutation,
 } from "@/redux/api/userApi";
-import EditUserProfile from "@/services/actions/EditUserProfile";
-import {getFromCookiesClient} from "@/utils/local-storage";
-import {DeleteSweep, EditNoteRounded} from "@mui/icons-material";
-import CloseIcon from "@mui/icons-material/Close";
+
 import {
   AppBar,
   Backdrop,

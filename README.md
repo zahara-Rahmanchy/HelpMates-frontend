@@ -1,18 +1,20 @@
 # Volunteering Platform- HelpMates
 
+### Client
+
 ### Tech Stack
 
-    Frontend
-    - Typescript
-    - Next JS
-    - Material UI
-    - Redux
+Frontend
 
-    Backend
-    - Express JS
-    - Node JS
-    - Postgres
-    - Prisma
+- Typescript
+- Next JS
+- Material UI
+- Redux
+  Backend
+- Express JS
+- Node JS
+- Postgres
+- Prisma
 
 ### Description & Features
 

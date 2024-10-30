@@ -1,6 +1,7 @@
 "use client";
-import CommonPopover from "@/components/UI/Dashboard/Pets/component/CommonPopover";
-import EditOpportunityData from "@/components/UI/Dashboard/Pets/EditOpportunityData";
+import CommonPopover from "@/components/UI/Dashboard/ManageOpportunity/component/CommonPopover";
+import EditOpportunityData from "@/components/UI/Dashboard/ManageOpportunity/EditOpportunityData";
+
 import {authKey} from "@/constants/authkey";
 import {opportunityTableHeads} from "@/constants/TableHeads";
 
@@ -39,7 +40,7 @@ import {toast} from "sonner";
 
 const ManageOpportunityPage = () => {
   const [open, setOpen] = useState(false);
-  const [adoptData, setAdoptData] = useState([]);
+  const [applicationData, setApplicationData] = useState([]);
   const {
     data: opportunityData,
     isLoading,
@@ -54,11 +55,11 @@ const ManageOpportunityPage = () => {
   // console.log("oppor: ", opportunityData);
 
   //   handle edit
-  const handleEdit = async (event: any, adoptionRequests: any) => {
+  const handleEdit = async (event: any, applicationRequests: any) => {
     event.preventDefault();
-    if (adoptionRequests) {
+    if (applicationRequests) {
       setOpen(true);
-      setAdoptData(adoptionRequests);
+      setApplicationData(applicationRequests);
     }
   };
 
@@ -310,7 +311,7 @@ const ManageOpportunityPage = () => {
       </TableContainer>
 
       <EditOpportunityData
-        opportunityData={adoptData}
+        opportunityData={applicationData}
         setOpen={setOpen}
         open={open}
       />
