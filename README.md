@@ -10,7 +10,9 @@
 - Next JS
 - Material UI
 - Redux
-  -Backend
+
+-Backend
+
 - Express JS
 - Node JS
 - Postgres
@@ -37,4 +39,4 @@
 
 ### Live Link
 
--
+- https://help-mates-frontend-1fiy.vercel.app
