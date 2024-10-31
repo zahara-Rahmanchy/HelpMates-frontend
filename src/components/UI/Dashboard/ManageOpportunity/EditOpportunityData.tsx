@@ -46,10 +46,9 @@ import Image from "next/image";
 import ApplicationRequests from "./ApplicationRequests";
 
 interface IEditProps {
-  opportunityData: any;
+  opportunityData?: any;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  // fetchPets: () => void;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -94,8 +93,8 @@ const EditOpportunityData: FC<IEditProps> = ({
     console.log("upd data:", data);
     const {image, startDate, endDate, skillsRequired, ...rest} = data;
     console.log("endDate: ", endDate);
-    const startDateString = startDate !== "" ? dayjs(startDate) : "";
-    const endDateString = endDate !== "" ? dayjs(endDate).toISOString() : "";
+    const startDateString = startDate !== "" ? dayjs(startDate) : null;
+    const endDateString = endDate !== "" ? dayjs(endDate).toISOString() : null;
     // const startDateString = startDate?.toISOString(); // Converts to ISO string
     // const endDateString = endDate?.toISOString();
 
@@ -145,6 +144,7 @@ const EditOpportunityData: FC<IEditProps> = ({
       if (res?.id) {
         toast.success("Opportunity Data updated Successfully!");
         reset();
+        setOpen(false);
       }
     } catch (err: any) {
       console.log("err: ", err);
@@ -330,7 +330,122 @@ const EditOpportunityData: FC<IEditProps> = ({
                         />
                       </Grid>
 
-                      <Grid
+                      {/* testing startdata */}
+                      <Grid item xs={12} md={3} textAlign={"left"}>
+                        <Controller
+                          name="startDate"
+                          control={control}
+                          render={({field}) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateTimePicker
+                                {...field}
+                                defaultValue={
+                                  opportunityData?.startDate
+                                    ? dayjs(opportunityData?.startDate)
+                                    : null
+                                }
+                                label={`Start: ${dayjs(
+                                  opportunityData.startDate
+                                ).format("hh:mm A , D MMM,YY")}`}
+                                value={field.value ? dayjs(field.value) : null} // Ensure it receives a Day.js object
+                                onChange={date => field.onChange(date)} // Update the form state
+                                sx={{
+                                  "& .MuiInputBase-root": {
+                                    border: "none",
+                                    borderRadius: "0",
+                                    // borderBottom: "1px solid grey",
+                                  },
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    border: "none",
+                                    borderRadius: "0",
+                                    borderBottom: "1px solid grey",
+                                  },
+                                  "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                    {
+                                      paddingX: "0px",
+
+                                      marginX: "0px",
+                                    },
+                                }}
+                                //@ts-ignore
+                                renderInput={params => (
+                                  <TextField
+                                    {...params}
+                                    variant="standard"
+                                    fullWidth={true}
+                                    sx={{
+                                      "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                        {
+                                          padding: "0px",
+                                          gap: "5px",
+                                          marginX: "0px",
+                                        },
+                                    }}
+                                    {...register("startDate")}
+                                  />
+                                )}
+                              />
+                            </LocalizationProvider>
+                          )}
+                        />
+                      </Grid>
+                      <Grid item xs={12} md={3}>
+                        <Controller
+                          name="endDate"
+                          control={control}
+                          render={({field}) => (
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                              <DateTimePicker
+                                {...field}
+                                defaultValue={
+                                  opportunityData?.endDate
+                                    ? dayjs(opportunityData?.endDate)
+                                    : null
+                                }
+                                label={`End: ${dayjs(
+                                  opportunityData.startDate
+                                ).format("hh:mm A , D MMM, YY")}`}
+                                value={field.value ? dayjs(field.value) : null} // Ensure it receives a Day.js object
+                                onChange={date => field.onChange(date)} // Update the form state
+                                sx={{
+                                  "& .MuiInputBase-root": {
+                                    border: "none",
+                                    borderRadius: "0",
+                                    // borderBottom: "1px solid grey",
+                                  },
+                                  "& .MuiOutlinedInput-notchedOutline": {
+                                    border: "none",
+                                    borderRadius: "0",
+                                    borderBottom: "1px solid grey",
+                                  },
+                                  "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                    {
+                                      paddingX: "0px",
+                                      marginX: "0px",
+                                    },
+                                }}
+                                //@ts-ignore
+                                renderInput={params => (
+                                  <TextField
+                                    {...params}
+                                    variant="standard"
+                                    fullWidth={true}
+                                    {...register("endDate")}
+                                    sx={{
+                                      "& .MuiInputBase-input-MuiOutlinedInput-input":
+                                        {
+                                          paddingX: "0px",
+                                          marginX: "0px",
+                                        },
+                                    }}
+                                  />
+                                )}
+                              />
+                            </LocalizationProvider>
+                          )}
+                        />
+                      </Grid>
+                      {/* <Grid
                         item
                         // bgcolor={"red"}
                         xs={12}
@@ -380,9 +495,9 @@ const EditOpportunityData: FC<IEditProps> = ({
                             </LocalizationProvider>
                           )}
                         />
-                      </Grid>
+                      </Grid> */}
 
-                      <Grid item xs={12} md={3}>
+                      {/* <Grid item xs={12} md={3}>
                         <Controller
                           name="endDate"
                           control={control}
@@ -423,7 +538,7 @@ const EditOpportunityData: FC<IEditProps> = ({
                             </LocalizationProvider>
                           )}
                         />
-                      </Grid>
+                      </Grid> */}
                       <Grid item xs={12} md={5}>
                         <TextField
                           id="standard-basic"

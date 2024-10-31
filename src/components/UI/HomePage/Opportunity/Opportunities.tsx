@@ -54,7 +54,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
     sortOrder: "",
   });
   const [loading, setLoading] = useState(false);
-  const [pets, setPets] = useState([]);
+
   const [anchorEl, setAnchorEl] = useState<boolean | null>(false);
   const updateQueryParams = () => {
     const currentQueryParams = new URLSearchParams(window.location.search);

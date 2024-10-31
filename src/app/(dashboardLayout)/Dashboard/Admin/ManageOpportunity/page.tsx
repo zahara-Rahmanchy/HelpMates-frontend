@@ -52,10 +52,11 @@ const ManageOpportunityPage = () => {
     console.log(error);
     toast.error("Something went wrong!");
   }
-  console.log("oppor: ", opportunityData);
+  // console.log("oppor: ", opportunityData);
 
   //   handle edit
   const handleEdit = async (event: any, applicationRequests: any) => {
+    console.log("event: ", event);
     event.preventDefault();
     if (applicationRequests) {
       setOpen(true);
@@ -258,6 +259,23 @@ const ManageOpportunityPage = () => {
                     {/* <Link href={`${}`}></Link> */}
                   </TableCell>
                   <TableCell component="th" scope="row">
+                    {/* <EditNoteRounded
+                      type="button"
+                      sx={{
+                        color: "blue",
+                        width: "20px",
+                        backgroundColor: "transparent",
+                        boxShadow: "none",
+                        cursor: "pointer",
+                        pointerEvents: "auto",
+                        ":hover": {
+                          backgroundColor: "transparent",
+                          color: "secondary.dark",
+                          boxShadow: "none",
+                        },
+                      }}
+                      onClick={event => handleEdit(event, value)}
+                    ></EditNoteRounded> */}
                     <Button
                       sx={{
                         color: "blue",
@@ -267,7 +285,7 @@ const ManageOpportunityPage = () => {
                         ":hover": {
                           backgroundColor: "transparent",
                           color: "secondary.dark",
-                          boxShadow: "none",
+                          // boxShadow: "none",
                         },
                       }}
                       onClick={event => handleEdit(event, value)}
