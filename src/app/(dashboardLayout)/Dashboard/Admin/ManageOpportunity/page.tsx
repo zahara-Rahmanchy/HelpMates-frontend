@@ -49,10 +49,10 @@ const ManageOpportunityPage = () => {
 
   const [deleteOpportunityData] = useDeleteOpportunityDataMutation();
   if (error) {
-    // console.log(error);
+    console.log(error);
     toast.error("Something went wrong!");
   }
-  // console.log("oppor: ", opportunityData);
+  console.log("oppor: ", opportunityData);
 
   //   handle edit
   const handleEdit = async (event: any, applicationRequests: any) => {
@@ -67,18 +67,6 @@ const ManageOpportunityPage = () => {
     const confirmed = confirm("Are you sure you want to delete the data?");
 
     if (confirmed) {
-      // const res = await fetch(
-      //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/pet/${id}`,
-      //   {
-      //     method: "DELETE",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //       Authorization: accessToken ? accessToken : "",
-      //     },
-      //     cache: "no-store",
-      //   }
-      // );
-      // const data = await res.json();
       try {
         const res = await deleteOpportunityData({
           id,
@@ -96,12 +84,14 @@ const ManageOpportunityPage = () => {
   };
   return (
     <Container>
-      <Backdrop
-        sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
-        open={isLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
+      {isLoading && (
+        <Backdrop
+          sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
+          open={isLoading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Typography component={"h5"} margin={3} fontSize={"20px"}>
         Manage Volunteering Opportunites: View, Update or Delete
       </Typography>
@@ -145,7 +135,8 @@ const ManageOpportunityPage = () => {
                 sx={{textAlign: "center", width: "100%", margin: "auto 0"}}
               />
             )} */}
-            {opportunityData &&
+            {opportunityData !== undefined &&
+              !isLoading &&
               opportunityData.map((value: any, key: number) => (
                 <TableRow key={key}>
                   <TableCell

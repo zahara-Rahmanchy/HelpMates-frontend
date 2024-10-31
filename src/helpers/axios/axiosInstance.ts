@@ -11,7 +11,7 @@ instance.defaults.timeout = 60000;
 instance.interceptors.request.use(
   function (config) {
     const accessToken = getFromCookiesClient(authKey);
-    console.log("accesstoken axios: ", accessToken);
+    // console.log("accesstoken axios: ", accessToken);
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
@@ -25,13 +25,15 @@ instance.interceptors.request.use(
 
 // Add a response interceptor
 instance.interceptors.response.use(
+  //@ts-ignore
   function (response) {
-    const responseObj: ResponseSuccessType = {
+    // Any status code that lie within the range of 2xx cause this function to trigger
+    // Do something with response data
+    const responseObject: ResponseSuccessType = {
       data: response?.data?.data,
       meta: response?.data?.meta,
     };
-    return response;
-    // return responseObj;
+    return responseObject;
   },
   function (error) {
     console.log("error : ", error);
