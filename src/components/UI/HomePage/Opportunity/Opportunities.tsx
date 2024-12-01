@@ -24,6 +24,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 import React, {ChangeEvent, useEffect, useState} from "react";
 
 import {useRouter} from "next/navigation";
@@ -54,7 +56,8 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
     sortOrder: "",
   });
   const [loading, setLoading] = useState(false);
-
+  const [toggle, setToggle] = useState(false);
+  console.log("togg: ", toggle);
   const [anchorEl, setAnchorEl] = useState<boolean | null>(false);
   const updateQueryParams = () => {
     const currentQueryParams = new URLSearchParams(window.location.search);
@@ -147,7 +150,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
       marginBottom={30}
       sx={{
         // backgroundColor: "grey",
-        padding: "50px",
+        // padding: "50px",
         marginTop: "100px",
         textAlign: "center",
       }}
@@ -176,25 +179,17 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
         gap={{xs: 10, lg: 2}}
         alignItems={{xs: "center", lg: "flex-start"}}
       >
+        {/* filter and search */}
         <Box
           display={"flex"}
-          width={{md: "40%", xs: "90%", lg: "25%"}}
+          width={{md: "90%", xs: "90%", lg: "25%"}}
           marginX="auto"
           flexDirection={{xs: "column"}}
           justifyContent="space-between"
           padding={"10px"}
           boxShadow={"2px 2px 2px 2px rgba(0, 0, 0, 0.01)"}
         >
-          <Typography
-            variant="body1"
-            color="primary.main"
-            fontWeight={"bold"}
-            fontSize={"22px"}
-            textAlign={"left"}
-          >
-            Filters
-          </Typography>
-
+          {" "}
           <TextField
             sx={{
               borderRadius: "50%",
@@ -209,185 +204,234 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
             label="Search"
             variant="standard"
           />
-          {/* skills filter */}
-          <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
-            <InputLabel id="demo-simple-select-label">Skills</InputLabel>
-            <Select
-              sx={{textAlign: "left"}}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={queryParams.skills}
-              label="Skills"
-              onChange={handleSkillsFilter}
+          <Box
+            marginTop={{xs: "30px"}}
+            display={"flex"}
+            justifyContent="space-between"
+            // bgcolor={"lightyellow"}
+          >
+            <Typography
+              variant="body1"
+              color="primary.main"
+              fontWeight={"bold"}
+              marginLeft={"5px"}
+              fontSize={"20px"}
+              textAlign={"left"}
             >
-              <MenuItem
-                value={""}
+              Filters
+            </Typography>
+            <Button
+              sx={{
+                display: {xs: "block", sm: "block", lg: "none"},
+                background: "transparent",
+                color: "primary.main",
+                boxShadow: "0",
+                border: "none",
+                outline: "none",
+                fontSize: "18px",
+                "&:hover": {
+                  background: "transparent",
+                  color: "primary.dark", // Darker primary color on hover
+                  transform: "scale(1.05)", // Slightly enlarge on hover
+                  transition: "all 0.2s ease-in-out", // Smooth transition
+                },
+              }}
+              // className="lg:hidden block  text-sky-900 px-3  w-[90%] mx-auto rounded-md"
+              onClick={() => setToggle(!toggle)}
+            >
+              {toggle ? <FilterListOffIcon /> : <FilterListIcon />}
+            </Button>
+          </Box>
+          <Box
+            display={{
+              lg: "flex", // Always visible on lg and above
+              xs: toggle ? "flex" : "none", // Toggles visibility for md and smaller
+            }}
+            flexDirection={{xs: "column"}}
+          >
+            {/* skills filter */}
+            <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+              <InputLabel id="demo-simple-select-label">Skills</InputLabel>
+              <Select
+                sx={{textAlign: "left"}}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={queryParams.skills}
+                label="Skills"
+                onChange={handleSkillsFilter}
+              >
+                <MenuItem
+                  value={""}
+                  sx={{
+                    textAlign: "left",
+                    "&:hover": {
+                      backgroundColor: "secondary.main",
+                      color: "white", // Set hover color
+                    },
+                  }}
+                >
+                  All
+                </MenuItem>
+                {skills !== null &&
+                  skills.map((need: string) => (
+                    <MenuItem
+                      value={need}
+                      key={need}
+                      sx={{
+                        textAlign: "left",
+                        "&:hover": {
+                          backgroundColor: "secondary.main",
+                          color: "white", // Set hover color
+                        },
+                      }}
+                    >
+                      {need}
+                    </MenuItem>
+                  ))}
+              </Select>
+            </FormControl>
+            {/* sort By options */}
+            <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
+              <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
+              <Select
                 sx={{
                   textAlign: "left",
-                  "&:hover": {
-                    backgroundColor: "secondary.main",
-                    color: "white", // Set hover color
+                  color: "grey",
+                  boxShadow: "none",
+                  background: "transparent",
+                }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Skills"
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      boxShadow: "none", // Remove box shadow from the dropdown
+                    },
                   },
                 }}
               >
-                All
-              </MenuItem>
-              {skills !== null &&
-                skills.map((need: string) => (
-                  <MenuItem
-                    value={need}
-                    key={need}
+                {/* duraiton sort */}
+                <MenuItem sx={{background: "white"}} value="duration">
+                  {" "}
+                  <FormControl
+                    onSubmit={e => e.preventDefault()}
                     sx={{
-                      textAlign: "left",
-                      "&:hover": {
-                        backgroundColor: "secondary.main",
-                        color: "white", // Set hover color
-                      },
+                      ml: "2px",
+                      mt: "10px",
+                      // padding: "5px",W
+                      color: "primary.dark",
                     }}
                   >
-                    {need}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-          {/* sort By options */}
-          <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
-            <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
-            <Select
-              sx={{
-                textAlign: "left",
-                color: "grey",
-                boxShadow: "none",
-                background: "transparent",
-              }}
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Skills"
-              MenuProps={{
-                PaperProps: {
-                  sx: {
-                    boxShadow: "none", // Remove box shadow from the dropdown
-                  },
-                },
-              }}
-            >
-              {/* duraiton sort */}
-              <MenuItem sx={{background: "white"}} value="duration">
-                {" "}
-                <FormControl
-                  onSubmit={e => e.preventDefault()}
-                  sx={{
-                    ml: "2px",
-                    mt: "10px",
-                    // padding: "5px",W
-                    color: "primary.dark",
-                  }}
+                    <FormLabel
+                      id="demo-controlled-radio-buttons-group"
+                      sx={{textAlign: "left", fontWeight: "normal"}}
+                    >
+                      Duration
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-controlled-radio-buttons-group"
+                      name="controlled-radio-buttons-group"
+                      sx={{
+                        justifyContent: {md: "space-around"},
+                        gap: {md: "30px", xs: "0px"},
+                        marginTop: "10px",
+                      }}
+                      value={
+                        queryParams.sortBy === "duration"
+                          ? queryParams.sortOrder
+                          : ""
+                      }
+                      onChange={event => handleSortBy(event, "duration")}
+                    >
+                      <FormControlLabel
+                        value="desc"
+                        control={<Radio size="small" />}
+                        label="High"
+                      />
+                      <FormControlLabel
+                        value="asc"
+                        control={<Radio size="small" />}
+                        label="Low"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </MenuItem>
+                {/* start date */}
+                <MenuItem
+                  sx={{background: "transparent"}}
+                  value="Starting Date"
                 >
-                  <FormLabel
-                    id="demo-controlled-radio-buttons-group"
-                    sx={{textAlign: "left", fontWeight: "normal"}}
-                  >
-                    Duration
-                  </FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
+                  {" "}
+                  <FormControl
                     sx={{
-                      justifyContent: {md: "space-around"},
-                      gap: {md: "30px", xs: "0px"},
-                      marginTop: "10px",
+                      ml: "2px",
+                      mt: "10px",
+                      // padding: "5px",
+                      color: "primary.dark",
                     }}
-                    value={
-                      queryParams.sortBy === "duration"
-                        ? queryParams.sortOrder
-                        : ""
-                    }
-                    onChange={event => handleSortBy(event, "duration")}
                   >
-                    <FormControlLabel
-                      value="desc"
-                      control={<Radio size="small" />}
-                      label="High"
-                    />
-                    <FormControlLabel
-                      value="asc"
-                      control={<Radio size="small" />}
-                      label="Low"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </MenuItem>
-              {/* start date */}
-              <MenuItem sx={{background: "transparent"}} value="Starting Date">
-                {" "}
-                <FormControl
-                  sx={{
-                    ml: "2px",
-                    mt: "10px",
-                    // padding: "5px",
-                    color: "primary.dark",
-                  }}
+                    <FormLabel
+                      id="demo-controlled-radio-buttons-group"
+                      sx={{textAlign: "left", fontWeight: "normal"}}
+                    >
+                      Starting Date
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-controlled-radio-buttons-group"
+                      name="controlled-radio-buttons-group"
+                      sx={{
+                        justifyContent: {md: "space-evenly"},
+                        gap: {xs: "70px", md: "10px"},
+                        marginTop: "10px",
+                      }}
+                      value={
+                        queryParams.sortBy === "start_date"
+                          ? queryParams.sortOrder
+                          : ""
+                      }
+                      onChange={event => handleSortBy(event, "start_date")}
+                      // onChange={handleDurationSortBy}
+                    >
+                      <FormControlLabel
+                        value="desc"
+                        control={<Radio size="small" />}
+                        label="Latest"
+                      />
+                      <FormControlLabel
+                        value="asc"
+                        control={<Radio size="small" />}
+                        label="Oldest"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </MenuItem>
+                <MenuItem
+                  value=""
+                  onChange={() => setQueryParams}
+                  sx={{paddingLeft: "20px"}}
                 >
-                  <FormLabel
-                    id="demo-controlled-radio-buttons-group"
-                    sx={{textAlign: "left", fontWeight: "normal"}}
-                  >
-                    Starting Date
-                  </FormLabel>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-controlled-radio-buttons-group"
-                    name="controlled-radio-buttons-group"
-                    sx={{
-                      justifyContent: {md: "space-evenly"},
-                      gap: {xs: "70px", md: "10px"},
-                      marginTop: "10px",
-                    }}
-                    value={
-                      queryParams.sortBy === "start_date"
-                        ? queryParams.sortOrder
-                        : ""
-                    }
-                    onChange={event => handleSortBy(event, "start_date")}
-                    // onChange={handleDurationSortBy}
-                  >
-                    <FormControlLabel
-                      value="desc"
-                      control={<Radio size="small" />}
-                      label="Latest"
-                    />
-                    <FormControlLabel
-                      value="asc"
-                      control={<Radio size="small" />}
-                      label="Oldest"
-                    />
-                  </RadioGroup>
-                </FormControl>
-              </MenuItem>
-              <MenuItem
-                value=""
-                onChange={() => setQueryParams}
-                sx={{paddingLeft: "20px"}}
-              >
-                None
-              </MenuItem>
-            </Select>
-          </FormControl>
-          {/* DateTime */}
-          <DateTime />
+                  None
+                </MenuItem>
+              </Select>
+            </FormControl>
+            {/* DateTime */}
+            <DateTime />
 
-          <Button
-            sx={{
-              marginTop: "40px",
-              minWidth: 130,
-              backgroundColor: "secondary.main",
-              color: "white",
-            }}
-            onClick={handleReset}
-          >
-            Reset
-          </Button>
+            <Button
+              sx={{
+                marginTop: "40px",
+                minWidth: 130,
+                backgroundColor: "secondary.main",
+                color: "white",
+              }}
+              onClick={handleReset}
+            >
+              Reset
+            </Button>
+          </Box>
         </Box>
 
         {loading && (
