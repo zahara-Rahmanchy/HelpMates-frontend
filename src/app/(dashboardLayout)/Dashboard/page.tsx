@@ -15,10 +15,13 @@ import {
 } from "@mui/material";
 import React from "react";
 import SignupsDashboard from "@/components/UI/Dashboard/MetaData/SignupsDashboard";
+import {getUserInfo} from "@/services/auth.services";
 
 const AdminDashboard = () => {
   const {data: dashboardData, isLoading} = useGetDashboardDataQuery("");
   console.log("dashboard: ", dashboardData);
+  const {role} = getUserInfo() as any;
+
   // const countData = dashboardData?.counts;
   return (
     <Box margin={"0 auto"} width="100%">
@@ -61,7 +64,7 @@ const AdminDashboard = () => {
               )}
             </Grid>
             <Grid item xs={12}>
-              <SignupsDashboard />
+              {role === "Admin" && <SignupsDashboard />}
               {/* {dashboardData?.applicationStatusBarChart !== undefined && (
                 <UserGrowthLine data={dashboardData?.userGrowthData} />
               )} */}

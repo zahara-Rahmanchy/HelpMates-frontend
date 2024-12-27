@@ -10,6 +10,7 @@ const commonPrivateRoutes = [
   "/MyProfile",
   "/VolunteerApplication",
   "/MyRequests",
+  "/Dashboard",
 ];
 const roleBasedPrivateRoutes = {
   Admin: [/^\/Dashboard\/Admin/],
@@ -67,5 +68,6 @@ export const config = {
     "/MyRequests",
     "/Dashboard/:page*",
     "/VolunteerApplication/:page*",
+    "/Dashboard",
   ],
 };

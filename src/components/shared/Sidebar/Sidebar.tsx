@@ -67,6 +67,24 @@ export const SideBar = () => {
             </ListItemButton>
           </Link>
         </ListItem>
+
+        {/* -----------------test----------------------- */}
+        {/* <ListItem disablePadding sx={{color: "primary.light"}}>
+          {role !== undefined && (
+            <Link href={"/Dashboard"}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <DashboardCustomizeOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={"Dashboard Analytics"}
+                  sx={{color: "primary.light"}}
+                />
+              </ListItemButton>
+            </Link>
+          )}
+        </ListItem> */}
+        {/* -------------------------test------------------------ */}
         <ListItem disablePadding sx={{color: "primary.light"}}>
           <Link
             href={role === "Admin" ? "/Dashboard/Admin" : "/Dashboard/User"}
@@ -76,7 +94,7 @@ export const SideBar = () => {
                 <DashboardCustomizeOutlinedIcon />
               </ListItemIcon>
               <ListItemText
-                primary={"Dashboard"}
+                primary={"Dashboard Analytics"}
                 sx={{color: "primary.light"}}
               />
             </ListItemButton>
@@ -174,7 +192,8 @@ export const SideBar = () => {
 
   return (
     <Box
-      bgcolor={"secondary.dark"}
+      // bgcolor={"secondary.dark"}
+      bgcolor="#511128"
       height={"100%"}
       sx={{color: "primary.light"}}
     >

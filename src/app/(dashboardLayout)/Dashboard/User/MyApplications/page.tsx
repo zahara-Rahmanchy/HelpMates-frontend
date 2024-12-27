@@ -4,6 +4,7 @@ import {useGetVolunteerApplicationDataForUserQuery} from "@/redux/api/volunteerA
 import {convertDuration} from "@/utils/convertDuration";
 import {DeleteSweep} from "@mui/icons-material";
 import {
+  Backdrop,
   Box,
   Button,
   CircularProgress,
@@ -38,6 +39,14 @@ const ApplicationPage = () => {
   console.log("appliocation data:", data);
   return (
     <Container>
+      {isLoading && (
+        <Backdrop
+          sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
+          open={isLoading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Typography
         component={"h5"}
         fontSize={"20px"}

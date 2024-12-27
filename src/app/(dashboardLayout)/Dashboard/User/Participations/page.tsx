@@ -7,6 +7,7 @@ import {
 import {convertDuration} from "@/utils/convertDuration";
 import {DeleteSweep} from "@mui/icons-material";
 import {
+  Backdrop,
   Box,
   Button,
   CircularProgress,
@@ -41,6 +42,14 @@ const ParticipationPage = () => {
   console.log("Participation data:", data);
   return (
     <Container>
+      {isLoading && (
+        <Backdrop
+          sx={{color: "#fff", zIndex: theme => theme.zIndex.drawer + 1}}
+          open={isLoading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Typography
         component={"h5"}
         fontSize={"20px"}

@@ -11,6 +11,8 @@ import {
   CircularProgress,
   Container,
   Grid,
+  IconButton,
+  InputAdornment,
   Stack,
   SvgIcon,
   TextField,
@@ -23,13 +25,14 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {toast} from "sonner";
 import MainLayout from "../layout";
 import Link from "next/link";
-import {url} from "inspector";
+
 import Logo from "@/components/shared/Navbar/Logo";
 import AuthDesign from "@/components/UI/Auth/AuthDesign";
-
+import {Visibility, VisibilityOff} from "@mui/icons-material";
 const LoginPage = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [show, setShow] = useState(false);
   const {
     register,
     handleSubmit,
@@ -140,7 +143,7 @@ const LoginPage = () => {
                     id="standard-basic"
                     label="Password"
                     variant="standard"
-                    type="password"
+                    type={show ? "text" : "password"}
                     fullWidth={true}
                     {...register("password", {
                       required: "Password is required!",
@@ -154,6 +157,15 @@ const LoginPage = () => {
                         message: "Password must be at most of 12 characters",
                       },
                     })}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton onClick={() => setShow(!show)}>
+                            {show ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
                   />
                   {errors.password && (
                     <span className="text-red-500 text-xs m-1">

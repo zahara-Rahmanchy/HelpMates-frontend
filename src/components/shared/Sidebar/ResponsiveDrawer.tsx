@@ -53,7 +53,7 @@ export default function ResponsiveDrawer({
         sx={{
           width: {sm: `calc(100% - ${drawerWidth}px)`},
           ml: {sm: `${drawerWidth}px`},
-          // color: "primary.main",
+
           bgcolor: "primary.main",
         }}
       >
@@ -67,8 +67,10 @@ export default function ResponsiveDrawer({
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            {role === "Admin" ? "Admin" : "User"}
+          <Typography variant="h6" fontSize={"18px"} noWrap component="div">
+            {role === "Admin"
+              ? "Admin Dashboard Analytics"
+              : "Dashboard Analytics"}
           </Typography>
         </Toolbar>
       </AppBar>
