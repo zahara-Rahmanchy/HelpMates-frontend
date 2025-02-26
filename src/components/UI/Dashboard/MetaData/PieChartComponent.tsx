@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const COLORS = ["#F7A582", "#872346", "#FF8042"];
-const PieChartComponent = ({piechartData}) => {
+const PieChartComponent = ({piechartData}: any) => {
   console.log("piedata: ", piechartData);
   return (
     <Card
