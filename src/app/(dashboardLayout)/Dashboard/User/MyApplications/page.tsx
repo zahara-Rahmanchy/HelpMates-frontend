@@ -74,7 +74,7 @@ const ApplicationPage = () => {
             }}
           >
             <TableRow>
-              {tableHeads.map((head, key) => (
+              {tableHeads?.map((head, key) => (
                 <TableCell key={key}>
                   {" "}
                   <Typography

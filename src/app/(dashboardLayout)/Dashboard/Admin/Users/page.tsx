@@ -111,7 +111,7 @@ const UsersPage = () => {
             }}
           >
             <TableRow>
-              {usersTableHeads.map((head, key) => (
+              {usersTableHeads?.map((head, key) => (
                 <TableCell key={key}>
                   {" "}
                   <Typography

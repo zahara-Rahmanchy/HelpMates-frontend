@@ -115,7 +115,7 @@ const ManageOpportunityPage = () => {
             }}
           >
             <TableRow>
-              {opportunityTableHeads.map((head, key) => (
+              {opportunityTableHeads?.map((head, key) => (
                 <TableCell key={key}>
                   {" "}
                   <Typography

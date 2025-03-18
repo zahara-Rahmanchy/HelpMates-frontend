@@ -272,8 +272,8 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
                 >
                   All
                 </MenuItem>
-                {skills !== null &&
-                  skills.map((need: string) => (
+                {(skills !== null || undefined) &&
+                  skills?.map((need: string) => (
                     <MenuItem
                       value={need}
                       key={need}

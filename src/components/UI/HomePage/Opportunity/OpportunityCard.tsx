@@ -32,8 +32,8 @@ const OpportunityCard = ({
 }) => {
   return (
     <>
-      {opportunities !== null &&
-        opportunities.map((opportunity: any) => (
+      {(opportunities !== null || undefined) &&
+        opportunities?.map((opportunity: any) => (
           <Grid
             width={"100%"}
             key={opportunity.id}
@@ -189,7 +189,7 @@ const OpportunityCard = ({
                   <List>
                     {opportunity.skillsRequired
                       .slice(0, 3)
-                      .map((skill: string, index: number) => (
+                      ?.map((skill: string, index: number) => (
                         <ListItem key={index} color="secondary.light">
                           <Typography color={"white"}>
                             <CheckCircleIcon

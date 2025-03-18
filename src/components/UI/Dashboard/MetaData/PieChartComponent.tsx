@@ -63,7 +63,7 @@ const PieChartComponent = ({piechartData}: any) => {
             />
             {/* Add Outside Labels for Status */}
 
-            {piechartData.map((_: any, index: number) => (
+            {piechartData?.map((_: any, index: number) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}

@@ -82,7 +82,7 @@ const TopCards = ({countData}: {countData: ICountData}) => {
         rowGap={2}
         flexDirection={{md: "row", xs: "column"}}
       >
-        {Object.entries(countData).map(([key, value]) => (
+        {Object.entries(countData)?.map(([key, value]) => (
           <Card
             key={key}
             sx={{

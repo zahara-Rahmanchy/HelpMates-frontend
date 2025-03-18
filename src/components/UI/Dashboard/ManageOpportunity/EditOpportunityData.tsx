@@ -107,7 +107,7 @@ const EditOpportunityData: FC<IEditProps> = ({
     if (image) {
       setImageLoading(true);
       const imgFiles = Object.values(image);
-      const urls = imgFiles.map((file, index) => uploadImage(file));
+      const urls = imgFiles?.map((file, index) => uploadImage(file));
       allImageUrls = await Promise.all(urls);
       // console.log("allurls: ", allImageUrls);
       setImageLoading(false);

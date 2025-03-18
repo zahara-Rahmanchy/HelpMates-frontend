@@ -100,7 +100,7 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
               }}
             >
               <TableRow>
-                {tableHeads.map((head, key) => (
+                {tableHeads?.map((head, key) => (
                   <TableCell key={key}>
                     {" "}
                     <Typography
@@ -115,7 +115,7 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {volunteerRequests.map((value: any, key: number) => (
+              {volunteerRequests?.map((value: any, key: number) => (
                 <TableRow key={key}>
                   <TableCell component="th" scope="row">
                     {value?.user?.name as string}

@@ -94,7 +94,7 @@ const ParticipationPage = () => {
           </TableHead>
           <TableBody>
             {data !== undefined ? (
-              data.map((value: any, key: number) => (
+              data?.map((value: any, key: number) => (
                 <TableRow key={key}>
                   <TableCell component="th" scope="row">
                     {value?.opportunity?.title as string}

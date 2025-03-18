@@ -50,7 +50,7 @@ const About = () => {
             />
           </Box>
           <Grid container rowSpacing={10} justifyContent="center">
-            {teamInformation.map((t: any) => (
+            {teamInformation?.map((t: any) => (
               <Grid
                 key={t.id}
                 item
