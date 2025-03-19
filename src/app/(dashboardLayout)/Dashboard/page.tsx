@@ -17,11 +17,13 @@ import React from "react";
 import SignupsDashboard from "@/components/UI/Dashboard/MetaData/SignupsDashboard";
 import {getUserInfo} from "@/services/auth.services";
 
-const AdminDashboard = () => {
+const DashboardComp = () => {
   const {data: dashboardData, isLoading} = useGetDashboardDataQuery("");
   console.log("dashboard: ", dashboardData);
-  const {role} = getUserInfo() as any;
 
+  const {role} = getUserInfo() as any;
+  console.log("role: ", role);
+  console.log("userinfr: ", getUserInfo());
   // const countData = dashboardData?.counts;
   return (
     <Box margin={"0 auto"} width="100%">
@@ -76,4 +78,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default DashboardComp;

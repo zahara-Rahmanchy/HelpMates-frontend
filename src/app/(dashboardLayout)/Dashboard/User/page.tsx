@@ -20,7 +20,7 @@ import {getUserInfo} from "@/services/auth.services";
 const UserDashboard = () => {
   const {data: dashboardData, isLoading} = useGetDashboardDataQuery("");
   console.log("dashboard: ", dashboardData);
-  const {role} = getUserInfo() as any;
+  // const {role} = getUserInfo() as any;
 
   // const countData = dashboardData?.counts;
   return (
