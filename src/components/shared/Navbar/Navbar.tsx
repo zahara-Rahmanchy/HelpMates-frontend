@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import MenuIcon from "@mui/icons-material/Menu";
-import {getUserInfo} from "@/services/auth.services";
+import {getUserInfo, IjwtPayload} from "@/services/auth.services";
 import {useRouter} from "next/router";
 import {usePathname} from "next/navigation";
 
@@ -13,13 +13,20 @@ const Navbar = () => {
   const AuthButtons = dynamic(() => import("@/components/UI/AuthButtons"), {
     ssr: false,
   });
+  const [userInfo, setUserInfo] = useState<IjwtPayload | null>(null);
 
   const [show, setShow] = useState(false);
-  const userInfo = getUserInfo();
+  // const userInfo = getUserInfo();
   const location = usePathname();
   console.log("userinfo: ", userInfo);
   const hideNav: boolean = location === "/Login" || location === "/Register";
   console.log("hide: ", hideNav);
+
+  useEffect(() => {
+    const user = getUserInfo();
+    setUserInfo(user || null);
+  }, []);
+
   return (
     <Box sx={{backgroundColor: "#872346"}}>
       {!hideNav && (
