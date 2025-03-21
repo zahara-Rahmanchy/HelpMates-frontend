@@ -10,11 +10,11 @@ const AuthDesign = () => {
       justifyContent={"center"}
       alignItems={"center"}
       color={"white"}
-      height={{lg: "100%", md: "300px"}}
+      height={{lg: "100%", xs: "300px"}}
       width={{lg: "40%", xs: "100%"}}
       sx={{
-        // height: "900px",
-        backgroundImage: 'url("/login1.png")', // path to your image
+        height: "900px",
+        backgroundImage: 'url("/login1.png")',
         // Ensures the image covers the entire box
         // backgroundSize: "cover",
         backgroundSize: {xs: "100%", md: "80%", lg: "110%"},

@@ -18,7 +18,7 @@ const Navbar = () => {
   const [show, setShow] = useState(false);
   // const userInfo = getUserInfo();
   const location = usePathname();
-  console.log("userinfo: ", userInfo);
+  // console.log("userinfo: ", userInfo);
   const hideNav: boolean = location === "/Login" || location === "/Register";
   console.log("hide: ", hideNav);
 

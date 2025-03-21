@@ -28,14 +28,15 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import FilterListOffIcon from "@mui/icons-material/FilterListOff";
 import React, {ChangeEvent, useEffect, useState} from "react";
 
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 import MainTitle from "@/components/shared/Title";
 import SubTitle from "@/components/shared/SubTitle";
 import DateTime from "./DateTime";
 import OpportunityCard from "./OpportunityCard";
+
 export interface OpporsProps {
   requests: [] | null;
-  skills: [] | null;
+  skills: string[] | null;
   error?: string;
 }
 interface IQueryParams {
@@ -48,6 +49,8 @@ interface IQueryParams {
 const Opportunities = ({requests, error, skills}: OpporsProps) => {
   console.log("requests: ", requests);
   const router = useRouter();
+  const {replace} = useRouter();
+  // const searchParams = useSearchParams();
   const [queryParams, setQueryParams] = useState<IQueryParams>({
     searchTerm: "",
     start_date: "",
@@ -61,7 +64,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
   const [anchorEl, setAnchorEl] = useState<boolean | null>(false);
   const updateQueryParams = () => {
     const currentQueryParams = new URLSearchParams(window.location.search);
-
+    // const currentQueryParams = new URLSearchParams(searchParams);
     for (const [key, value] of Object.entries(queryParams)) {
       if (value) {
         currentQueryParams.set(key, value);
@@ -74,26 +77,17 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
       ? `${window.location.pathname}?${currentQueryParams.toString()}`
       : window.location.pathname;
 
-    router.push(newUrl, {scroll: false}); // Update the URL
+    replace(newUrl, {scroll: false}); // Update the URL
     console.log("newurl: ", newUrl);
   };
 
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
+    // const value = event.target.value;
     const value = event.target.value;
-    console.log("value: ", value);
-    // Update local state
-    if (value !== "") {
-      setQueryParams(prevParams => ({
-        ...prevParams,
-        searchTerm: value,
-      }));
-    }
-    if (value === "") {
-      setQueryParams(prevParams => ({
-        ...prevParams,
-        searchTerm: value,
-      }));
-    }
+    setQueryParams(prevParams => ({
+      ...prevParams,
+      searchTerm: value,
+    }));
   };
   console.log("query params: ", queryParams);
   const handleReset = () => {
@@ -108,7 +102,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
 
   const handleSortBy = (
     event: ChangeEvent<HTMLInputElement>,
-    type: "duration" | "start_date"
+    type: "duration" | "startDate"
   ) => {
     event.preventDefault();
     const value = event.target.value;
@@ -272,6 +266,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
                 >
                   All
                 </MenuItem>
+
                 {(skills !== null || undefined) &&
                   skills?.map((need: string) => (
                     <MenuItem
@@ -291,133 +286,107 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
               </Select>
             </FormControl>
             {/* sort By options */}
-            <FormControl variant="standard" sx={{m: 1, minWidth: 130}}>
-              <InputLabel id="demo-simple-select-label">Sort By</InputLabel>
-              <Select
+
+            <Typography
+              variant="body1"
+              color="primary.main"
+              marginY={"20px"}
+              fontWeight={"semibold"}
+              marginLeft={"5px"}
+              fontSize={"16px"}
+              textAlign={"left"}
+            >
+              Sort By
+            </Typography>
+            <FormControl
+              sx={{
+                marginBottom: "20px",
+                color: "primary.dark",
+                paddingBottom: "20px",
+                borderBottom: "1px solid",
+                borderColor: "grey",
+                // borderTop: "10px solid !important",
+              }}
+            >
+              <FormLabel
                 sx={{
                   textAlign: "left",
-                  color: "grey",
-                  boxShadow: "none",
-                  background: "transparent",
-                }}
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                label="Skills"
-                MenuProps={{
-                  PaperProps: {
-                    sx: {
-                      boxShadow: "none", // Remove box shadow from the dropdown
-                    },
-                  },
+                  fontWeight: "normal",
+                  marginLeft: "5px",
                 }}
               >
-                {/* duraiton sort */}
-                <MenuItem sx={{background: "white"}} value="duration">
-                  {" "}
-                  <FormControl
-                    onSubmit={e => e.preventDefault()}
-                    sx={{
-                      ml: "2px",
-                      mt: "10px",
-                      // padding: "5px",W
-                      color: "primary.dark",
-                    }}
-                  >
-                    <FormLabel
-                      id="demo-controlled-radio-buttons-group"
-                      sx={{textAlign: "left", fontWeight: "normal"}}
-                    >
-                      Duration
-                    </FormLabel>
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      sx={{
-                        justifyContent: {md: "space-around"},
-                        gap: {md: "30px", xs: "0px"},
-                        marginTop: "10px",
-                      }}
-                      value={
-                        queryParams.sortBy === "duration"
-                          ? queryParams.sortOrder
-                          : ""
-                      }
-                      onChange={event => handleSortBy(event, "duration")}
-                    >
-                      <FormControlLabel
-                        value="desc"
-                        control={<Radio size="small" />}
-                        label="High"
-                      />
-                      <FormControlLabel
-                        value="asc"
-                        control={<Radio size="small" />}
-                        label="Low"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </MenuItem>
-                {/* start date */}
-                <MenuItem
-                  sx={{background: "transparent"}}
-                  value="Starting Date"
-                >
-                  {" "}
-                  <FormControl
-                    sx={{
-                      ml: "2px",
-                      mt: "10px",
-                      // padding: "5px",
-                      color: "primary.dark",
-                    }}
-                  >
-                    <FormLabel
-                      id="demo-controlled-radio-buttons-group"
-                      sx={{textAlign: "left", fontWeight: "normal"}}
-                    >
-                      Starting Date
-                    </FormLabel>
-                    <RadioGroup
-                      row
-                      aria-labelledby="demo-controlled-radio-buttons-group"
-                      name="controlled-radio-buttons-group"
-                      sx={{
-                        justifyContent: {md: "space-evenly"},
-                        gap: {xs: "70px", md: "10px"},
-                        marginTop: "10px",
-                      }}
-                      value={
-                        queryParams.sortBy === "start_date"
-                          ? queryParams.sortOrder
-                          : ""
-                      }
-                      onChange={event => handleSortBy(event, "start_date")}
-                      // onChange={handleDurationSortBy}
-                    >
-                      <FormControlLabel
-                        value="desc"
-                        control={<Radio size="small" />}
-                        label="Latest"
-                      />
-                      <FormControlLabel
-                        value="asc"
-                        control={<Radio size="small" />}
-                        label="Oldest"
-                      />
-                    </RadioGroup>
-                  </FormControl>
-                </MenuItem>
-                <MenuItem
-                  value=""
-                  onChange={() => setQueryParams}
-                  sx={{paddingLeft: "20px"}}
-                >
-                  None
-                </MenuItem>
-              </Select>
+                Duration
+              </FormLabel>
+              <RadioGroup
+                row
+                value={
+                  queryParams.sortBy === "duration" ? queryParams.sortOrder : ""
+                }
+                onChange={event => handleSortBy(event, "duration")}
+                sx={{
+                  justifyContent: {md: "space-around"},
+                  gap: {md: "30px", xs: "0px"},
+                  marginTop: "10px",
+                }}
+              >
+                <FormControlLabel
+                  value="desc"
+                  control={<Radio size="small" />}
+                  label="High"
+                />
+                <FormControlLabel
+                  value="asc"
+                  control={<Radio size="small" />}
+                  label="Low"
+                />
+              </RadioGroup>
             </FormControl>
-            {/* DateTime */}
+
+            <FormControl
+              sx={{
+                color: "primary.dark",
+                paddingBottom: "20px",
+                borderBottom: "1px solid",
+                borderColor: "grey",
+              }}
+            >
+              <FormLabel
+                sx={{
+                  textAlign: "left",
+                  fontWeight: "normal",
+                  marginLeft: "5px",
+                }}
+              >
+                Starting Date
+              </FormLabel>
+              <RadioGroup
+                row
+                value={
+                  queryParams.sortBy === "startDate"
+                    ? queryParams.sortOrder
+                    : ""
+                }
+                onChange={event => handleSortBy(event, "startDate")}
+                sx={{
+                  justifyContent: {md: "space-around"},
+                  gap: {xs: "70px", md: "10px"},
+                  marginTop: "10px",
+                }}
+              >
+                <FormControlLabel
+                  value="desc"
+                  control={<Radio size="small" />}
+                  label="Latest"
+                />
+                <FormControlLabel
+                  value="asc"
+                  control={<Radio size="small" />}
+                  label="Oldest"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            {/******************************  DateTime ***********************************/}
             <DateTime />
 
             <Button
