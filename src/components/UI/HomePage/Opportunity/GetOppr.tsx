@@ -43,6 +43,10 @@ const GetOppr = async ({searchParams}: any) => {
     },
   });
   const skiilsArr = await skiils.json();
+  console.log("skills: ", skiilsArr.data);
+  const uniqueSkills = [
+    ...new Set(skiilsArr?.data?.map((item: string) => item.trim())),
+  ];
   let requestsData;
   let error;
   if (result?.success === true) {
@@ -58,7 +62,7 @@ const GetOppr = async ({searchParams}: any) => {
       <Opportunities
         requests={result.data}
         error={error}
-        skills={skiilsArr.data}
+        skills={uniqueSkills}
         // skills={skillsArr}
       />
     </>
