@@ -42,10 +42,12 @@ const GetOppr = async ({searchParams}: any) => {
       "Content-Type": "application/json",
     },
   });
-  const skiilsArr = await skiils.json();
-  console.log("skills: ", skiilsArr.data);
-  const uniqueSkills = [
-    ...new Set(skiilsArr?.data?.map((item: string) => item.trim())),
+  const skillsArr = await skiils.json();
+  // console.log("skills: ", skiilsArr.data);
+  const uniqueSkills: string[] = [
+    ...new Set(
+      (skillsArr?.data as string[])?.map((item: string) => item.trim())
+    ),
   ];
   let requestsData;
   let error;
