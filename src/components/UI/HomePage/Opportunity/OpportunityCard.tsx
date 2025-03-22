@@ -1,3 +1,4 @@
+"use client"
 import {
   Box,
   Button,
@@ -11,6 +12,7 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
+
 import Image from "next/image";
 import React from "react";
 import dayjs from "dayjs";
@@ -21,8 +23,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Link from "next/link";
 import {convertDuration} from "@/utils/convertDuration";
 import utc from "dayjs/plugin/utc"; // Import UTC plugin
-import timezone from "dayjs/plugin/timezone"; // Import timezone plugin
-
+import timezone from "dayjs/plugin/timezone"; // Import timezone 
 dayjs.extend(utc);
 dayjs.extend(timezone);
 const OpportunityCard = ({
@@ -35,6 +36,7 @@ const OpportunityCard = ({
       {(opportunities !== null || undefined) &&
         opportunities?.map((opportunity: any) => (
           <Grid
+        
             width={"100%"}
             key={opportunity.id}
             item
@@ -51,17 +53,17 @@ const OpportunityCard = ({
             sx={{position: "relative"}} // Ensure relative positioning for overlay
           >
             <Card
+             
               sx={{
                 width: {xs: 345},
                 justifyContent: "center",
                 textAlign: "left",
                 marginX: "auto",
                 marginTop: "5px",
-                // minHeight: "fit-content",
+               
                 height: "450px",
                 alignItems: "center",
-                // backgroundColor: "white",
-                // backgroundColor: "tertiary.main",
+               
                 position: "relative",
                 overflow: "hidden",
 
@@ -71,6 +73,7 @@ const OpportunityCard = ({
               }}
             >
               <CardMedia
+             
                 sx={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -106,6 +109,7 @@ const OpportunityCard = ({
                 </Box>
               </CardMedia>
               <Box
+             
                 height={"50%"}
                 display={"flex"}
                 gap={0.1}
@@ -121,7 +125,7 @@ const OpportunityCard = ({
                   // paddingX: "30px",
                 }}
               >
-                <Typography variant="h5" color="primary.dark" fontSize={"20px"}>
+                <Typography  variant="h5" color="primary.dark" fontSize={"20px"}>
                   {opportunity.title}
                 </Typography>
                 <Typography variant="subtitle1" color="tert">

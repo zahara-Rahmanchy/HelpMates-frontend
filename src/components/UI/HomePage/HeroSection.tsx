@@ -1,15 +1,23 @@
-import getEnvVariable from "@/utils/getEnvVariable";
-import {BorderColor} from "@mui/icons-material";
+"use client";
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import {blue} from "@mui/material/colors";
 import Image from "next/image";
 import React from "react";
+import {motion, stagger} from "framer-motion";
+import {staggerContainer, textVariant1,bannerAnimations,slideAnimation,fadeIn} from "@/DesignUtils/motion";
+import {getBoxStyles} from "@/DesignUtils/materialStyle"
+// import dynamic from "next/dynamic";
+
+// const MotionComponent = dynamic(
+//   () => import("framer-motion").then(mod => mod.motion),
+//   {ssr: false}
+// );
+
+// const MotionComponent = dynamic(() => import("framer-motion").then((mod) => mod.motion), { ssr: false });
+
 // import assets from "@assets";
 const HeroSection = () => {
-  function gradient(at: any, arg1: number) {
-    throw new Error("Function not implemented.");
-  }
-
+ 
   return (
     <Box sx={{backgroundColor: "#872346"}}>
       <svg
@@ -35,6 +43,7 @@ const HeroSection = () => {
         }}
       >
         <Stack
+         
           direction={{
             xs: "column-reverse",
             // sm: "column-reverse",
@@ -43,14 +52,15 @@ const HeroSection = () => {
           }}
           alignItems={"center"}
           justifyContent={"space-between"}
+         
+
         >
           <Box
-            bgcolor={blue}
+            // bgcolor={blue}
+            component={motion.div}
+            animate="show"
+            variants={staggerContainer}
             width={{md: "90%", xs: "100%"}}
-            // height="500px"
-            // position={{md: "relative", xs: "static"}}
-            // top="35%"
-
             sx={{
               display: "flex",
               gap: 2,
@@ -61,19 +71,21 @@ const HeroSection = () => {
             }}
           >
             <Box
-              sx={{
-                // display: {xs: "none", md: "none", lg: "block"},
-                border: "8px solid", // Adds a solid border
-                borderColor: "secondary.light",
-                outline: "1px  dotted",
-                outlineColor: "white",
-                outlineOffset: "3px",
-                background: "#872346",
-                position: "relative",
-                right: {md: "7%", xs: "-9%"},
-                // bottom: {md: "none", xs: "20px"},
-                zIndex: {md: 3, xs: 0},
-              }}
+              // component={motion.div}
+              // variants={fadeIn('up', 'tween', 10, 1)}
+              // variants={slideAnimation("left")} 
+              // initial="initial" whileInView="whileInView"
+             
+             sx={getBoxStyles({
+              
+              right: "7%",
+              borderColor: "secondary.light",
+             
+              zIndex: 3,
+              display: "block", // `md` is optional
+            })}
+
+              
             >
               <Image
                 src="/volunteer3.png"
@@ -85,21 +97,17 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-              sx={{
-                display: {xs: "none", md: "block"},
-                border: "8px solid", // Adds a solid border
-                borderColor: "secondary.main",
-                outline: "1px  dotted",
-                outlineColor: "white",
-                outlineOffset: "3px",
-                position: "relative",
-                background: "#872346",
-                right: {md: "16%", xs: "0"},
-                // top: "30%",
-                bottom: {md: "-130px", xs: "0"},
-                zIndex: 2,
-              }}
-            >
+            component={motion.div}
+            variants={slideAnimation("down")} initial="initial" whileInView="whileInView"
+             sx={getBoxStyles({
+              right: {md: "16%", xs: "0"},
+              bottom: {md: "-130px", xs: "0"},
+              zIndex: 2,
+              borderColor: "#F06D64",
+              
+              display: {xs: "none", md: "block"},
+            })}
+             >
               <Image
                 src="/volunteer2.png"
                 alt="img"
@@ -109,20 +117,16 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-              sx={{
-                display: {xs: "block"},
-                position: "relative",
-
+              component={motion.div}
+              variants={slideAnimation("up")} initial="initial" whileInView="whileInView"
+             
+              sx={getBoxStyles({  
                 right: {md: "29%", xs: "0%"},
-                bottom: {md: "90px", xs: "25px"},
-                border: "8px solid", // Adds a solid border
-                borderColor: "primary.light",
-                background: "#872346",
-                outline: "1px  dotted",
-                outlineColor: "white",
-                outlineOffset: "3px",
+                bottom: {md: "90px", xs: "25px"}, 
+                borderColor:"primary.light",
                 zIndex: {md: 2, xs: 1},
-              }}
+              })}
+              
             >
               <Image
                 src="/volunteer4.png"
@@ -133,20 +137,17 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-              sx={{
-                display: "block",
-                position: "relative",
-                right: {md: "43%", xs: "9%"},
-                bottom: {md: "-40px", xs: "0px"},
-                // bottom: "-2px",
-                background: "#872346",
-                border: "8px solid", // Adds a solid border
-                borderColor: "white",
-                outline: "1px  dotted",
-                outlineColor: "primary.light",
-                outlineOffset: "3px",
-                zIndex: {md: 1, xs: 2},
-              }}
+              component={motion.div}
+              variants={slideAnimation("right")} initial="initial" whileInView="whileInView"
+             
+            sx={getBoxStyles({
+              outlineColor: "#F7A582",
+              right: {md: "43%", xs: "9%"},
+              bottom: {md: "-40px", xs: "0px"},
+              borderColor:"white",
+              zIndex: {md: 1, xs: 2},
+            })}
+             
             >
               <Image
                 src="/volunteer!.png"
@@ -158,19 +159,15 @@ const HeroSection = () => {
             </Box>
 
             <Box
-              sx={{
-                display: {xs: "none", md: "block"},
-                border: "8px solid", // Adds a solid border
-                borderColor: "secondary.light",
-                outline: "1px  dotted",
-                outlineColor: "white",
-                outlineOffset: "3px",
-                background: "#872346",
-                position: "relative",
-                right: {md: "52%", xs: "0"},
-                bottom: {md: "50px", xs: "0"},
-                zIndex: 0,
-              }}
+            
+            sx={getBoxStyles({
+              display: {xs: "none", md: "block"},
+              borderColor: "secondary.light",
+              right: {md: "52%", xs: "0"},
+              bottom: {md: "50px", xs: "0"},
+              zIndex: 0,
+            })}
+             
             >
               <Image
                 src="/volunteer5.png"
@@ -182,18 +179,19 @@ const HeroSection = () => {
             </Box>
           </Box>
           <Box
+            component={motion.div}
             py={2}
             position={{md: "absolute", xs: "static"}}
             left="55%"
-            // top={{lg: "20%"}}
+            
           >
             <Typography
-              // fontSize={"60px"}
+              component={motion.h3}
+             {...bannerAnimations}
               fontSize={{md: "40px", xs: "30px"}}
               fontWeight={"bold"}
               variant="h3"
               color="white"
-              component="h3"
             >
               Empower Communities,
               <br />
@@ -208,33 +206,47 @@ const HeroSection = () => {
                 Purpose
               </Box>
             </Typography>
-            <Typography
-              variant="body1"
-              color={"white"}
-              fontStyle={{md: "italic", xs: "normal"}}
-              sx={{
-                width: {lg: "70%", xs: "100%"},
-                marginY: "10px",
-                // margin: "10px",
+            <Box
+              component={motion.div}
+              initial={{y: 50, opacity: 0}}
+              whileInView={{y: 0, opacity: 1}} // Triggers 'show' when in the viewport
+              viewport={{once: false}}
+              transition={{
+                type: "spring",
+                stiffness: 30,
+                damping: 10,
+                duration: 1.0,
+                ease: "easein",
               }}
             >
-              Join hands with us to create a lasting impact in communities and
-              transform lives through meaningful volunteer opportunities.
-            </Typography>
+              <Typography
+                variant="body1"
+                color={"white"}
+                fontStyle={{md: "italic", xs: "normal"}}
+                sx={{
+                  width: {lg: "70%", xs: "100%"},
+                  marginY: "10px",
+                  // margin: "10px",
+                }}
+              >
+                Join hands with us to create a lasting impact in communities and
+                transform lives through meaningful volunteer opportunities.
+              </Typography>
 
-            <Button
-              color="primary"
-              sx={{
-                backgroundColor: "secondary.main",
+              <Button
+                color="primary"
+                sx={{
+                  backgroundColor: "secondary.main",
 
-                color: "white",
-                borderColor: "secondary.main",
+                  color: "white",
+                  borderColor: "secondary.main",
 
-                boxShadow: "10px",
-              }}
-            >
-              Explore
-            </Button>
+                  boxShadow: "10px",
+                }}
+              >
+                Explore
+              </Button>
+            </Box>
           </Box>
         </Stack>
       </Container>

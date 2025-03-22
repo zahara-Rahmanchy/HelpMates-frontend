@@ -1,18 +1,28 @@
 // import React from 'react'
-
+"use client"
 import {Box, Container, Stack, Typography} from "@mui/material";
+import {motion, stagger} from "framer-motion";
+import {staggerContainer,slideAnimation,fadeIn,fadeIn2} from "@/DesignUtils/motion";
 
 const HomeCards = () => {
   return (
     <Box>
       <Container>
         <Stack
+         component={motion.div}
+         animate="show"
+         variants={staggerContainer}
           direction={{md: "row", xs: "column"}}
           gap={5}
           justifyContent="center"
           alignItems={"center"}
         >
           <Stack
+          component={motion.div}
+          
+          variants={slideAnimation("down")}
+         initial="initial" 
+         whileInView="whileInView"
             direction={"row"}
             bgcolor="secondary.main"
             //   justifyContent={"center"}
@@ -37,7 +47,9 @@ const HomeCards = () => {
                 stroke-linejoin="round"
               />
             </svg>
-            <Box paddingRight={"10px"} paddingTop={"10px"}>
+            <Box paddingRight={"10px"} paddingTop={"10px"}   
+            >
+
               <Typography
                 color="white"
                 variant="body1"
@@ -61,6 +73,9 @@ const HomeCards = () => {
             </Box>
           </Stack>
           <Stack
+          component={motion.div}
+          variants={slideAnimation("down")}
+         initial="initial" whileInView="whileInView"
             direction={"row"}
             bgcolor="secondary.dark"
             //   justifyContent={"center"}
@@ -118,6 +133,9 @@ const HomeCards = () => {
             </Box>
           </Stack>
           <Stack
+           component={motion.div}
+           variants={slideAnimation("down")}
+          initial="initial" whileInView="whileInView"
             direction={"row"}
             bgcolor="primary.light"
             //   justifyContent={"center"}

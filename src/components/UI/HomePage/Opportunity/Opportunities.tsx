@@ -33,19 +33,21 @@ import MainTitle from "@/components/shared/Title";
 import SubTitle from "@/components/shared/SubTitle";
 import DateTime from "./DateTime";
 import OpportunityCard from "./OpportunityCard";
-
+import {motion}  from "framer-motion";
+import {staggerContainer, textVariant1,bannerAnimations,slideAnimation,fadeIn} from "@/DesignUtils/motion";
 export interface OpporsProps {
   requests: [] | null;
   skills: string[] | null;
   error?: string;
 }
-interface IQueryParams {
+export interface IQueryParams {
   searchTerm?: string;
   start_date?: string;
   skills?: string;
   sortBy?: string;
   sortOrder?: string;
 }
+
 const Opportunities = ({requests, error, skills}: OpporsProps) => {
   console.log("requests: ", requests);
   const router = useRouter();
@@ -175,6 +177,7 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
       >
         {/* filter and search */}
         <Box
+        
           display={"flex"}
           width={{md: "90%", xs: "90%", lg: "25%"}}
           marginX="auto"
