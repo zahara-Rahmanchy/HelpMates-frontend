@@ -3,8 +3,8 @@ import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import {blue} from "@mui/material/colors";
 import Image from "next/image";
 import React from "react";
-import {motion, stagger} from "framer-motion";
-import {staggerContainer, textVariant1,bannerAnimations,slideAnimation,fadeIn} from "@/DesignUtils/motion";
+// import {motion, stagger} from "framer-motion";
+// import {staggerContainer, textVariant1,bannerAnimations,slideAnimation,fadeIn} from "@/DesignUtils/motion";
 import {getBoxStyles} from "@/DesignUtils/materialStyle"
 // import dynamic from "next/dynamic";
 
@@ -57,9 +57,9 @@ const HeroSection = () => {
         >
           <Box
             // bgcolor={blue}
-            component={motion.div}
-            animate="show"
-            variants={staggerContainer}
+            // component={motion.div}
+            // animate="show"
+            // variants={staggerContainer}
             width={{md: "90%", xs: "100%"}}
             sx={{
               display: "flex",
@@ -97,8 +97,8 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-            component={motion.div}
-            variants={slideAnimation("down")} initial="initial" whileInView="whileInView"
+            // component={motion.div}
+            // variants={slideAnimation("down")} initial="initial" whileInView="whileInView"
              sx={getBoxStyles({
               right: {md: "16%", xs: "0"},
               bottom: {md: "-130px", xs: "0"},
@@ -117,8 +117,8 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-              component={motion.div}
-              variants={slideAnimation("up")} initial="initial" whileInView="whileInView"
+              // component={motion.div}
+              // variants={slideAnimation("up")} initial="initial" whileInView="whileInView"
              
               sx={getBoxStyles({  
                 right: {md: "29%", xs: "0%"},
@@ -137,8 +137,8 @@ const HeroSection = () => {
               />
             </Box>
             <Box
-              component={motion.div}
-              variants={slideAnimation("right")} initial="initial" whileInView="whileInView"
+              // component={motion.div}
+              // variants={slideAnimation("right")} initial="initial" whileInView="whileInView"
              
             sx={getBoxStyles({
               outlineColor: "#F7A582",
@@ -179,15 +179,15 @@ const HeroSection = () => {
             </Box>
           </Box>
           <Box
-            component={motion.div}
+            // component={motion.div}
             py={2}
             position={{md: "absolute", xs: "static"}}
             left="55%"
             
           >
             <Typography
-              component={motion.h3}
-             {...bannerAnimations}
+              // component={motion.h3}
+            //  {...bannerAnimations}
               fontSize={{md: "40px", xs: "30px"}}
               fontWeight={"bold"}
               variant="h3"
@@ -207,17 +207,17 @@ const HeroSection = () => {
               </Box>
             </Typography>
             <Box
-              component={motion.div}
-              initial={{y: 50, opacity: 0}}
-              whileInView={{y: 0, opacity: 1}} // Triggers 'show' when in the viewport
-              viewport={{once: false}}
-              transition={{
-                type: "spring",
-                stiffness: 30,
-                damping: 10,
-                duration: 1.0,
-                ease: "easein",
-              }}
+              // component={motion.div}
+              // initial={{y: 50, opacity: 0}}
+              // whileInView={{y: 0, opacity: 1}} // Triggers 'show' when in the viewport
+              // viewport={{once: false}}
+              // transition={{
+              //   type: "spring",
+              //   stiffness: 30,
+              //   damping: 10,
+              //   duration: 1.0,
+              //   ease: "easein",
+              // }}
             >
               <Typography
                 variant="body1"

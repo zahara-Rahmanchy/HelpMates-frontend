@@ -34,7 +34,7 @@ const UserProfileUI = ({profile}: {profile: IProfile}) => {
         gap={2}
         direction={{xs: "column", sm: "row"}}
         sx={{
-          // backgroundColor: "white",
+          backgroundColor: "white",
           borderRadius: "30px",
           // margin: "10px",
         }}

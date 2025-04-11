@@ -48,7 +48,7 @@ const ProfilePage = async () => {
 
         <Stack
           marginTop={2}
-          sx={{backgroundColor: "secondary.light", borderRadius: "30px"}}
+          sx={{backgroundColor: "white", borderRadius: "30px"}}
           direction={{xs: "column", sm: "row"}}
           // justifyContent={"space-evenly"}
           alignItems={"center"}
