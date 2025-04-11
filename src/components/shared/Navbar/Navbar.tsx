@@ -84,7 +84,7 @@ const Navbar = () => {
                     ? "/Dashboard/Admin"
                     : userInfo?.role === "User"
                     ? "/Dashboard/User"
-                    : "/"
+                    : "/Login"
                 }
               >
                 Dashboard
