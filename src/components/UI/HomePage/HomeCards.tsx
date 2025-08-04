@@ -11,7 +11,7 @@ const HomeCards = () => {
         <Stack
          component={motion.div}
          animate="show"
-         variants={staggerContainer}
+        //  variants={staggerContainer}
           direction={{md: "row", xs: "column"}}
           gap={5}
           justifyContent="center"

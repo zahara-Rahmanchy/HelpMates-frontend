@@ -28,15 +28,18 @@ const Navbar = () => {
   }, []);
 
   return (
-    <Box sx={{backgroundColor: "#872346"}}>
+    <Box sx={{backgroundColor: "#872346",position:"fixed", left:0,right:0, zIndex:30}}>
       {!hideNav && (
-        <Container sx={{width: "100%"}}>
+        <Container sx={{width: "100%" }}  >
           <Stack
             direction={{xs: "column", lg: "row"}}
             justifyContent="space-between"
             alignItems={"center"}
             py={2}
+            margin={0}
             width="100%"
+           
+            bgcolor={"red"}
             sx={{backgroundColor: "#872346"}}
           >
             <Stack

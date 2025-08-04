@@ -2,6 +2,7 @@ import HeroSection from "@/components/UI/HomePage/HeroSection";
 import HomeCards from "@/components/UI/HomePage/HomeCards";
 import GetOppr from "@/components/UI/HomePage/Opportunity/GetOppr";
 import Opportunities from "@/components/UI/HomePage/Opportunity/Opportunities";
+import HowItWorksSection from "@/components/UI/HomePage/WorkingProcess";
 import TestimonialsPreview from "@/components/UI/Testimonials/TestimonialPreview";
 
 import {Button, Container, Typography} from "@mui/material";
@@ -27,7 +28,7 @@ export default function Home({
     <>
       <HeroSection />
       <HomeCards />
-
+      {/* <HowItWorksSection/> */}
       <GetOppr searchParams={searchParams} />
       <TestimonialsPreview/>
     </>

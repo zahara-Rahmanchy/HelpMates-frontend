@@ -38,7 +38,7 @@ const HeroSection = () => {
         sx={{
           marginBottom: "200px",
           minHeight: "500px",
-          paddingY: {md: "100px"},
+          paddingY: {md: "200px"},
           // paddingBottom:{md:}
         }}
       >
