@@ -8,7 +8,7 @@ import SubTitle from "@/components/shared/SubTitle";
 const TestimonialsPreview = () => {
   const preview = testimonials.slice(0, 3); 
   return (
-    <Box className="py-10 bg-gray-100 px-4 md:px-10 text-center" bgcolor={"tertiary.light"}>
+    <Box className="pb-10  px-4 md:px-10 text-center" >
        <MainTitle
         
         value={String("What our Partner says")}
@@ -21,8 +21,11 @@ const TestimonialsPreview = () => {
         ))}
       </div>
       <div className="mt-6">
-        <Link href="/testimonials">
-          <Button  className=" text-white px-5 py-2 rounded hover:bg-rose-700 bg-rose-950">
+        <Link href="/Testimonials">
+          <Button sx={{
+            width:"200px",
+            bgcolor:"primary.main"
+          }}  className=" text-white px-5 py-2 rounded hover:bg-rose-700 bg-rose-950">
             View More
           </Button>
         </Link>
