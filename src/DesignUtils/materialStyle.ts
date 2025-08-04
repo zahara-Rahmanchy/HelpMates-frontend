@@ -1,3 +1,5 @@
+import { IImageBox } from "./materialStyleTypes";
+
 // styles.ts
 export const getBoxStyles = ({
     display = "block", // Default display
