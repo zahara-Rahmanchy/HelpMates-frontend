@@ -2,7 +2,7 @@
 "use client"
 import {Box, Container, Stack, Typography} from "@mui/material";
 import {motion, stagger} from "framer-motion";
-import {staggerContainer,slideAnimation,fadeIn,fadeIn2} from "@/DesignUtils/motion";
+import {staggerContainer,slideAnimation,fadeIn} from "@/DesignUtils/motion";
 
 const HomeCards = () => {
   return (

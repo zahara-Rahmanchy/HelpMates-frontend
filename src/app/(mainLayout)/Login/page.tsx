@@ -207,6 +207,51 @@ const LoginPage = () => {
                 </Box>
               </Link>
             </Typography>
+            {/* <Box display={"flex"} ><hr/> OR <hr/></Box> */}
+            
+            <Stack  width="100%"
+                justifyContent={"center"}  spacing={2} alignItems={"center"} mb={3}>
+              <Button
+              sx={{
+                  width: "200px",
+                  textAlign: "center",
+                  marginBottom: 5,
+                }}
+                variant="outlined"
+                onClick={() =>
+                  handleSubmit(() =>
+                    onSubmit({
+                      email: "jane@gmail.com",
+                      password: "jane1234",
+                      name: "Jane Smiths"
+                    })
+                  )()
+                }
+              >
+                Magic Login as Admin
+              </Button>
+              <Button
+                variant="outlined"
+                 sx={{
+                  width: "300px",
+                
+                  textAlign: "center",
+                  fontSize:"14px",
+                  marginBottom: 5,
+                }}
+                onClick={() =>
+                  handleSubmit(() =>
+                    onSubmit({
+                      email: "robert@gmail.com",
+                      password: "robert123",
+                      name: ""
+                    })
+                  )()
+                }
+              >
+                Magic Login as Volunteer
+              </Button>
+            </Stack>
           </Box>
         </Stack>
       </Stack>

@@ -89,3 +89,13 @@ A platform connecting volunteers with meaningful opportunities to contribute to 
 ### Live Link
 
 - https://help-mates-frontend-1fiy.vercel.app
+
+###### To Test as Admin or Volunteer,you can use the below login credentials
+
+- Admin: 
+  Email:jane@gmail.com   
+  Passowrd: jane1234
+
+- Volunteer:
+  Email: robert@gmail.com
+  Password: robert123

@@ -75,6 +75,16 @@ const Navbar = () => {
               <Typography component={Link} href="/AboutUs" color={"white"}>
                 About Us
               </Typography>
+               <Typography component={Link} href="/AllOpportunity" color={"white"}>
+                All Opportunity
+              </Typography>
+              <Typography component={Link} href="/Testimonials" color={"white"}>
+                Testimonials
+              </Typography>
+
+              <Typography component={Link} href="/AboutUs" color={"white"}>
+                Blogs
+              </Typography>
 
               <Typography
                 component={Link}
