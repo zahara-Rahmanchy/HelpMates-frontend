@@ -9,8 +9,8 @@ export default function TestimonialsPage() {
         <CommonHeader headerFirst={"Testimonials"} headerSecond="How does our organizations feel!" />
       <h1 className="text-3xl font-bold mb-8">Testimonials</h1>
       <div className="grid md:grid-cols-2 gap-6">
-        {testimonials.map((t, index) => (
-          <TestimonialCard key={index} testimonial={t} />
+        {testimonials.map((review, index) => (
+          <TestimonialCard key={index} testimonial={review} />
         ))}
       </div>
     </Box>

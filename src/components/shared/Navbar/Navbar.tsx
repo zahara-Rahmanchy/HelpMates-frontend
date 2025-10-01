@@ -28,7 +28,11 @@ const Navbar = () => {
   }, []);
 
   return (
-    <Box sx={{backgroundColor: "#872346",position:"fixed", left:0,right:0, zIndex:30}}>
+    <Box 
+    // sx={{background: "linear-gradient(150deg, #6B143D 0%, #512C6E 100%)",
+    bgcolor={"secondary.dark"}
+    sx={{
+    position: "sticky", left:0,right:0,top:0, zIndex:30}}>
       {!hideNav && (
         <Container sx={{width: "100%" }}  >
           <Stack
@@ -39,8 +43,8 @@ const Navbar = () => {
             margin={0}
             width="100%"
            
-            bgcolor={"red"}
-            sx={{backgroundColor: "#872346"}}
+            // bgcolor={"red"}
+            // sx={{backgroundColor: "#872346"}}
           >
             <Stack
               width={{xs: "100%", lg: "fit-content"}}
@@ -48,7 +52,7 @@ const Navbar = () => {
               gap="5"
               justifyContent="space-between"
               alignItems={{lg: "stretch", xs: "center"}}
-              sx={{backgroundColor: "#872346"}}
+              // sx={{backgroundColor: "#872346"}}
             >
               <Logo />
               <Box display={{lg: "none"}}>
@@ -68,9 +72,9 @@ const Navbar = () => {
               gap={4}
               alignItems="center"
               zIndex={6}
-              sx={{
-                backgroundColor: "#872346",
-              }}
+              // sx={{
+              //   backgroundColor: "#872346",
+              // }}
             >
               <Typography component={Link} href="/" color={"white"}>
                 Home

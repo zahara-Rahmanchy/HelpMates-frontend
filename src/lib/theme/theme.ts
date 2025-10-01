@@ -25,12 +25,15 @@ export const theme = createTheme({
       main: "#F06D64", // dark peach
 
       light: "#fcbab8", //light pink
-      dark: "#872346", //main magenta color
+      // dark: "#872346", //main magenta color
+      dark:"#731A42",
+      // dark:"linear-gradient(150deg, #6B143D 0%, #512C6E 100%)"
     },
     tertiary: {
       main: "#F3E9DD", //light pink
       light: "#f3f3f3",
     },
+    
   },
   components: {
     MuiButton: {

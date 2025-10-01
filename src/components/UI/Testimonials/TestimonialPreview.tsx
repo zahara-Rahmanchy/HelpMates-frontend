@@ -20,7 +20,7 @@ const TestimonialsPreview = () => {
           <TestimonialCard key={index} testimonial={t} />
         ))}
       </div>
-      <div className="mt-6">
+      <div className="mt-10">
         <Link href="/Testimonials">
           <Button sx={{
             width:"200px",

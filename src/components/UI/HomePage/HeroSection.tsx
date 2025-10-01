@@ -19,7 +19,8 @@ import {getBoxStyles} from "@/DesignUtils/materialStyle"
 const HeroSection = () => {
  
   return (
-    <Box sx={{backgroundColor: "#872346"}}>
+    <Box //sx={{background: "linear-gradient(150deg, #6B143D 0%, #512C6E 100%)"}}
+      bgcolor={"secondary.dark"}>
       <svg
         className="absolute w-[100px] top-[2%]"
         width="239"

@@ -42,9 +42,10 @@ const OpportunityCard = ({
             item
             xs={12}
             sm={12}
+            // lg={4}
             md={6}
             // container
-            // spacing={8}
+            // spacing={4}
             marginBottom={{xs: "100px", lg: "auto"}}
             // textAlign={"center"}
             // justifyContent={"center"}

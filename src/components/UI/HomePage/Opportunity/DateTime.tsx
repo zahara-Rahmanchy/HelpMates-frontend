@@ -54,6 +54,8 @@ const DateTime = () => {
       // Add your additional logic here (e.g., send to server, display somewhere, etc.)
     }
   };
+  const [dateValue, setDateValue] = React.useState<Dayjs | null>(dayjs());
+
   return (
     <ThemeProvider theme={defaultPickerTheme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -69,6 +71,8 @@ const DateTime = () => {
           <DemoItem label="">
             {/* <Box bgcolor={"red"}> */}
             <StaticDateTimePicker
+             value={dateValue ?? null}   // 👈 here is where you put the value
+  // onChange={(newValue) => setDateValue(newValue)}  
               onAccept={handleAccept}
               slotProps={{
                 tabs: {
