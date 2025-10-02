@@ -3,6 +3,7 @@ import { Box, Card, CardContent, List, ListItem, ListItemText, Stack, Typography
 import Image from 'next/image'
 import React from 'react'
 import { SparklesIcon, ClockIcon, AcademicCapIcon, UsersIcon, CursorArrowRaysIcon, ShieldCheckIcon, StarIcon } from "@heroicons/react/24/outline";
+import { FitScreen } from '@mui/icons-material';
 const WhyUs = () => {
   const points = [
     {
@@ -56,17 +57,18 @@ const iconBgColors = [
 ];
 
   return (
-    <Box textAlign={"center"} marginY={15}>
+    <Box textAlign={"center"} marginY={15} sx={{ maxHeight: "fit-content" }}>
       <MainTitle 
          value={String("Why Choose Volunteering with HelpMates?")}
          colorCode="#F06D64"
         />  
-    <Stack direction={{xs: "column", lg: "row"}} 
+    <Stack direction={{xs: "column", md: "row"}} 
       // bgcolor={"blue"}
      
        justifyContent={"center"}
-       marginTop={10}
-       className="h-[600px] max-h-fit"
+       marginTop={{lg:10,xs:20}}
+      //  marginBottom={10}
+       className="md:h-[600px] max-h-fit"
     >
        <Stack spacing={2} justifyContent={{lg:"center",xs:"left"}} //bgcolor={"red"}
        >
@@ -78,15 +80,16 @@ const iconBgColors = [
             key={index}
             sx={{
               display: "flex",
-              alignItems: "center",
+              alignItems: {md:"center",xs:"self-start"},
               justifyContent:"center",
+              position:"static",
               // background: "linear-gradient(135deg, #6B143D 0%, #512C6E 100%)",
               color: "tertiary.dark",
               borderRadius: 2,
               marginTop:4,
               // boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
               boxShadow:"none",
-              padding: 5
+              padding: {md:5,xs:2}
             }}
           >
             <Box
@@ -94,9 +97,10 @@ const iconBgColors = [
                 flexShrink: 0,
                 // backgroundColor:"red",
                 backgroundColor: bgColor,
+                boxShadow:"5px",
                 borderRadius: "50%",
                 padding: 1.5,
-                marginRight: 2,
+                marginRight: {md:2},
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"
@@ -108,7 +112,7 @@ const iconBgColors = [
               <Typography variant="h6" fontWeight="bold" textAlign={"left"}>
                 {point.title}
               </Typography>
-              <Typography variant="body2" sx={{ opacity: 0.9 }} color={""}>
+              <Typography variant="body2" sx={{ opacity: 0.9 }} color={""} textAlign={{xs:"left"}}>
                 {point.desc}
               </Typography>
             </CardContent>
@@ -116,7 +120,7 @@ const iconBgColors = [
         );
       })}
     </Stack>
-      <Box width={{md:"50%",xs:"100%"}} display={"flex"} justifyContent={"center"}   position={'relative'}
+      <Box width={{md:"50%",xs:"100%"}} display={{md:"flex", xs:"none"}} justifyContent={"center"}   position={'relative'}
         sx={{
           
             // border: "8px solid #fcbab8", 
@@ -127,22 +131,26 @@ const iconBgColors = [
         }}>
       <Image src="https://images.unsplash.com/photo-1652971876875-05db98fab376?q=80&w=1129&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         height={"300"} width={"500"} alt='image' loading='lazy'
-        style={{position:"absolute",borderRadius:"10px",boxShadow:"-9px 10px 50px 3px #731A42"}}/>
+        className="lg:[600px] md:w-[500px] static md:absolute rounded-lg  md:shadow-[-12px_21px_50px_1px_#731A42]"
+
+        // style={{position:"absolute",borderRadius:"10px",boxShadow:"-9px 10px 50px 3px #731A42"}}
+        />
       
       
       <Image src="https://images.unsplash.com/photo-1557660559-42497f78035b?q=80&w=1246&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         height={"300"} width={"400"} alt='image' loading='lazy'  
-        style={{position:"absolute",borderRadius:"10px",top:"50%", right:"-2%",  zIndex:1
-          ,boxShadow:"-10px 0px 50px 3px #731A42"
-        }}/>
+        // className='absolute borderpr'
+        className="lg:w-[400px] md:w-[200px] static md:absolute rounded-lg top-1/2 md:right-[6%] z-[1] md:shadow-[-10px_0px_50px_3px_#731A42]"
+
+        // style={{position:"absolute",borderRadius:"10px",top:"50%", right:"-2%",  zIndex:1
+        //   ,boxShadow:"-10px 0px 50px 3px #731A42"
+        // }}
+        />
 
          <Image src="/volunteers.jpg"
-        height={"350"} width={"200"} alt='image' loading='lazy' 
-         
-        style={{position:"absolute",borderRadius:"10px",left:"20%",top:"55%",
-          zIndex:2
-          ,boxShadow:"-10px 0px 100px 3px #731A42"
-        }}/>
+          height={"350"} width={"200"} alt='image' loading='lazy' 
+          className='static md:absolute rounded-lg  left-[20%] top-[50%] z-[2] md:shadow-[-5px_0px_100px_2px_#731A42]'
+        />
 
       </Box>
     </Stack>

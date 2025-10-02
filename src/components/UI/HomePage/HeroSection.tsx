@@ -51,6 +51,7 @@ const HeroSection = () => {
             md: "row-reverse",
             lg: "row",
           }}
+          paddingTop={{xs:"50px",md:"0"}}
           alignItems={"center"}
           justifyContent={"space-between"}
          
@@ -76,10 +77,11 @@ const HeroSection = () => {
               // variants={fadeIn('up', 'tween', 10, 1)}
               // variants={slideAnimation("left")} 
               // initial="initial" whileInView="whileInView"
-             
+             /***** Light pink border  ***** */
              sx={getBoxStyles({
               
-              right: "7%",
+              right: {md: "7%",xs:"auto"},
+              left:{xs:"9%",md:"auto"},
               borderColor: "secondary.light",
              
               zIndex: 3,
@@ -117,13 +119,15 @@ const HeroSection = () => {
                 style={{width: "120rem"}}
               />
             </Box>
+
+            {/* light peach border */}
             <Box
               // component={motion.div}
               // variants={slideAnimation("up")} initial="initial" whileInView="whileInView"
              
               sx={getBoxStyles({  
                 right: {md: "29%", xs: "0%"},
-                bottom: {md: "90px", xs: "25px"}, 
+                bottom: {md: "90px", xs: "40px"}, 
                 borderColor:"primary.light",
                 zIndex: {md: 2, xs: 1},
               })}

@@ -1,6 +1,8 @@
 export interface IImageBox {
     display?: string | { xs?: string; md?: string }; // xs and md are optional
     right?: string | {md?: string, xs?: string};
+    left?: string | {md?: string, xs?: string};
+    top?: string | {md?: string, xs?: string};
     bottom?: string | {md?: string, xs?: string};
     zIndex?: number | {md?: number, xs?: number};
     width?: string | {md?: string, xs?: string};

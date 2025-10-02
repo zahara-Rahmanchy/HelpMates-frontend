@@ -4,6 +4,8 @@ import { IImageBox } from "./materialStyleTypes";
 export const getBoxStyles = ({
     display = "block", // Default display
     right = "0%", // Default right
+    left="auto", 
+    top="auto",
     bottom = "0", // Default bottom
     zIndex = 1, // Default z-index
     width = "120rem", // Default width
@@ -17,6 +19,8 @@ export const getBoxStyles = ({
     outlineOffset: "3px", 
     display,
     position: "relative",
+    top,
+    left,
     right,
     bottom,
     zIndex,

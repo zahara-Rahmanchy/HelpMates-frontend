@@ -7,6 +7,8 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {StaticDateTimePicker} from "@mui/x-date-pickers/StaticDateTimePicker";
 import {Box, createTheme, ThemeProvider} from "@mui/material";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
+import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 // import {
 //   PickersFadeTransitionGroupProps,
 //   PickersSlideTransitionClasses,
@@ -57,11 +59,18 @@ const defaultPickerTheme = createTheme({
     },
   },
 });
-const DateTime = () => {
+interface DateTimeProps {
+  onDateSelect: (date: string) => void;
+}
+const DateTime = ({ onDateSelect }: DateTimeProps) => {
+  
+
   const handleAccept = (acceptedDate: Dayjs | null) => {
     if (acceptedDate) {
       console.log("Accepted Date and Time:", acceptedDate.format());
-      // Add your additional logic here (e.g., send to server, display somewhere, etc.)
+      const formattedDate = acceptedDate.format("YYYY-MM-DDTHH:mm:ss"); // Prisma DateTime expects ISO string
+      onDateSelect(formattedDate)
+      
     }
   };
   // const [dateValue, setDateValue] = React.useState<Dayjs | null>(dayjs());

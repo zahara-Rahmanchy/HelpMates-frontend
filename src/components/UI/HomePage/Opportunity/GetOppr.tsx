@@ -1,16 +1,7 @@
 "use server";
 import getEnvVariable from "@/utils/getEnvVariable";
 import Opportunities from "./Opportunities";
-// {
-//   searchParams = {},
-// }: {
-//   searchParams?: {
-//     searchTerm?: string;
-//     sortBy?: string;
-//     sortOrder?: string;
-//     rentalPlan?: string;
-//   };
-// }
+
 
 const GetOppr = async ({searchParams}: any) => {
   console.log("pro: ", searchParams);
@@ -18,14 +9,7 @@ const GetOppr = async ({searchParams}: any) => {
   // // console.log("Se: ", searchParams);
   const query = new URLSearchParams(searchParams);
   const queries = query.toString();
-  // console.log("que: ", queries, "\n without string: ", query);
 
-  // console.log(
-  //   "searchParams: ",
-  //   searchParams,
-  //   "url: ",
-  //   `${url}/vehicles${queries}`
-  // );
   const res = await fetch(`${url}/opportunities?${queries}`, {
     method: "GET",
     headers: {

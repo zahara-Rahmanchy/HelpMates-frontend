@@ -6,7 +6,9 @@ const MainTitle = ({value, colorCode}: {value: string; colorCode: string}) => {
       sx={{
         textAlign: "center",
         position: "relative",
-        display: "inline-block",
+        width:'100%',
+       
+        // display: "inline-block",
         mx: "auto",
         marginTop: "40px",
         marginBottom: "5px",
@@ -17,7 +19,7 @@ const MainTitle = ({value, colorCode}: {value: string; colorCode: string}) => {
         variant="h3"
         component="h1"
         color={"#1f2937"}
-        fontSize={"40px"}
+        fontSize={{md:"40px",xs:"30px"}}
         sx={{fontWeight: "bold", display: "inline-block", zIndex: 90}}
       >
         {value}

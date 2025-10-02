@@ -390,7 +390,12 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
             </FormControl>
 
             {/******************************  DateTime ***********************************/}
-            <DateTime />
+            <DateTime onDateSelect={(start_date:string)=>
+              setQueryParams(prevParams=>({
+                ...prevParams,
+                start_date:start_date}
+              ))
+            } />
 
             <Button
               sx={{
