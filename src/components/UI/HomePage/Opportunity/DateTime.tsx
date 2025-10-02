@@ -7,6 +7,16 @@ import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {StaticDateTimePicker} from "@mui/x-date-pickers/StaticDateTimePicker";
 import {Box, createTheme, ThemeProvider} from "@mui/material";
 import type {} from "@mui/x-date-pickers/themeAugmentation";
+// import {
+//   PickersFadeTransitionGroupProps,
+//   PickersSlideTransitionClasses,
+// } from "@mui/x-date-pickers";
+// import { PickersFadeTransitionGroup } from "@mui/x-date-pickers/DateCalendar/PickersFadeTransitionGroup";
+// import { PickersSlideTransition } from "@mui/x-date-pickers/DateCalendar/PickersSlideTransition";
+
+// (PickersFadeTransitionGroup as any).defaultProps = undefined;
+// (PickersSlideTransition as any).defaultProps = undefined;
+
 const defaultPickerTheme = createTheme({
   palette: {
     primary: {
@@ -54,7 +64,7 @@ const DateTime = () => {
       // Add your additional logic here (e.g., send to server, display somewhere, etc.)
     }
   };
-  const [dateValue, setDateValue] = React.useState<Dayjs | null>(dayjs());
+  // const [dateValue, setDateValue] = React.useState<Dayjs | null>(dayjs());
 
   return (
     <ThemeProvider theme={defaultPickerTheme}>
@@ -71,16 +81,16 @@ const DateTime = () => {
           <DemoItem label="">
             {/* <Box bgcolor={"red"}> */}
             <StaticDateTimePicker
-             value={dateValue ?? null}   // 👈 here is where you put the value
+            //  value={dateValue ?? null}   // 👈 here is where you put the value
   // onChange={(newValue) => setDateValue(newValue)}  
               onAccept={handleAccept}
               slotProps={{
                 tabs: {
-                  sx: {
-                    // backgroundColor: "#F06D64",
-                    color: "purple",
-                    width: "100%",
-                  },
+                  // sx: {
+                  //   // backgroundColor: "#F06D64",
+                  //   color: "purple",
+                  //   width: "100%",
+                  // },
                 },
                 actionBar: {
                   actions: ["clear", "accept"],
