@@ -68,7 +68,11 @@ const DateTime = ({ onDateSelect }: DateTimeProps) => {
   const handleAccept = (acceptedDate: Dayjs | null) => {
     if (acceptedDate) {
       console.log("Accepted Date and Time:", acceptedDate.format());
-      const formattedDate = acceptedDate.format("YYYY-MM-DDTHH:mm:ss"); // Prisma DateTime expects ISO string
+      const formattedDate = acceptedDate
+      .utc()
+      .set('second', 0)
+      .set('millisecond', 0)
+      .format('YYYY-MM-DDTHH:mm[Z]');// Prisma DateTime expects ISO string
       onDateSelect(formattedDate)
       
     }

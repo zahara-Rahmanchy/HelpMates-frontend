@@ -26,7 +26,7 @@ import {
 } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import FilterListOffIcon from "@mui/icons-material/FilterListOff";
-import React, {ChangeEvent, useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useRef, useState} from "react";
 
 import {useRouter, useSearchParams} from "next/navigation";
 import MainTitle from "@/components/shared/Title";
@@ -64,6 +64,10 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
   const [toggle, setToggle] = useState(false);
   console.log("togg: ", toggle);
   const [anchorEl, setAnchorEl] = useState<boolean | null>(false);
+  // used to reference the timer
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null)
+
+
   const updateQueryParams = () => {
     const currentQueryParams = new URLSearchParams(window.location.search);
     // const currentQueryParams = new URLSearchParams(searchParams);
@@ -86,10 +90,16 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
   const handleSearchChange = (event: ChangeEvent<HTMLInputElement>) => {
     // const value = event.target.value;
     const value = event.target.value;
-    setQueryParams(prevParams => ({
+    debounceTimer.current && clearTimeout(debounceTimer.current)
+    
+    debounceTimer.current = setTimeout(() => {
+       setQueryParams(prevParams => ({
       ...prevParams,
       searchTerm: value,
     }));
+      
+    }, 500);
+   
   };
   console.log("query params: ", queryParams);
   const handleReset = () => {
@@ -135,8 +145,9 @@ const Opportunities = ({requests, error, skills}: OpporsProps) => {
 
   useEffect(() => {
     updateQueryParams();
+    // router.replace(newUrl, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryParams]);
+  }, [queryParams,router]);
 
   // console.log("needs: ", specialNeedsArray);
   //
