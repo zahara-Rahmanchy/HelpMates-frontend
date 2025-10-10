@@ -219,13 +219,10 @@ const LoginPage = () => {
                 }}
                 variant="outlined"
                 onClick={() =>
-                  handleSubmit(() =>
-                    onSubmit({
-                      email: "jane@gmail.com",
-                      password: "jane1234",
-                      name: "Jane Smiths"
-                    })
-                  )()
+                  onSubmit({
+                    email: "jane@gmail.com",
+                    password: "jane1234",
+                  } as LoginInputs)
                 }
               >
                 Magic Login as Admin
@@ -239,15 +236,12 @@ const LoginPage = () => {
                   fontSize:"14px",
                   marginBottom: 5,
                 }}
-                onClick={() =>
-                  handleSubmit(() =>
-                    onSubmit({
-                      email: "robert@gmail.com",
-                      password: "robert123",
-                      name: ""
-                    })
-                  )()
-                }
+               onClick={() =>
+                onSubmit({
+                  email: "robert@gmail.com",
+                  password: "robert123",
+                } as LoginInputs)
+              }
               >
                 Magic Login as Volunteer
               </Button>

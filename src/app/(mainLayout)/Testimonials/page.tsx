@@ -1,18 +1,36 @@
 import testimonials from "@/data/testimonial.json";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import CommonHeader from "@/components/shared/CommonHeader";
 import TestimonialCard from "@/components/UI/Testimonials/TestimonialCard";
 
 export default function TestimonialsPage() {
   return (
-     <Box  paddingBottom={20}>
+     <Box  paddingBottom={20} bgcolor={"#fef2f2"} width={"100%"}>
         <CommonHeader  headerFirst={"Testimonials"} headerSecond="How does our organizations feel!" />
-      <h1 className="text-3xl font-bold mb-8 ms-10">Testimonials</h1>
-      <div className="grid md:grid-cols-3 gap-6 px-10 bg-red-50">
-        {testimonials.map((review, index) => (
-          <TestimonialCard key={index} testimonial={review} />
+      
+      <Grid
+          container
+          spacing={2} // gap between items
+          justifyContent="center" // horizontal centering
+          alignItems="center" // vertical centering
+          py={5}
+          marginTop={{md:10}}
+        >
+          {testimonials.map((review, index) => (
+            <Grid
+              item
+              key={index}
+              py={5}
+              xs={12} // 1 column for small screens
+              md={4}  // 3 columns for medium and above (12/4=3)
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <TestimonialCard testimonial={review} />
+            </Grid>
         ))}
-      </div>
+      </Grid>
     </Box>
   );
 }
