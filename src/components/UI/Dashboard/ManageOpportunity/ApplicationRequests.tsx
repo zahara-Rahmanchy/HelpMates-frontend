@@ -1,9 +1,16 @@
+"use client"
 import {authKey} from "@/constants/authkey";
 import {useUpdateVolunteerApplicationDataMutation} from "@/redux/api/volunteerApplicationApi";
 import {getFromCookiesClient} from "@/utils/local-storage";
+import { LockClosedIcon } from "@heroicons/react/24/outline";
 import {
+  AppBar,
+  Backdrop,
   Button,
+  CircularProgress,
   Container,
+  Dialog,
+  IconButton,
   Link,
   Paper,
   Table,
@@ -12,12 +19,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Toolbar,
   Typography,
 } from "@mui/material";
 import {useRouter} from "next/navigation";
 
-import React from "react";
+import React, { FC, useState } from "react";
 import {toast} from "sonner";
+import { Transition } from "./EditOpportunityData";
 
 const tableHeads = [
   "User Name",
@@ -27,8 +36,16 @@ const tableHeads = [
   "Accept",
   "Reject",
 ];
-const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
-  const router = useRouter();
+interface IApplicationsProps {
+  volunteerRequests?: any;
+  applicationOpen: boolean;
+  setApplicationOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const ApplicationRequests: FC<IApplicationsProps> = ({volunteerRequests,applicationOpen, setApplicationOpen}) => {
+  console.log("open: ",applicationOpen)
+  const router  = useRouter();
+
+    
   const [updateVolunteerRequest] = useUpdateVolunteerApplicationDataMutation();
   const handleStatus = async (
     params: string,
@@ -40,13 +57,7 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
         params === "APPROVED" ? "approve" : "reject"
       } the request?`
     );
-    console.log(
-      "delete id: ",
-
-      "conf: ",
-      confirmed,
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/adoption-requests/${id}`
-    );
+  
     const update = {
       opportunityId: opportunityId,
       status: params,
@@ -58,12 +69,12 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
 
         if (res?.id) {
           toast.success(
-            `Adoption Request ${
+            `Application Request ${
               params === "APPROVED" ? "accepted successfully!" : "rejected!"
             }`
           );
           router.refresh();
-          setOpen(false);
+          setApplicationOpen(false);
           // router.refresh();
           // window.location.reload();
           // fetchPets();
@@ -78,25 +89,47 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
     }
   };
   return (
-    <Container sx={{marginBottom: "100px"}}>
-      <Typography
-        variant="h5"
-        color="primary.main"
-        fontWeight={"bold"}
-        my={4}
-        // marginTop={"10px"}
-      >
-        Application Requests
-      </Typography>
-      {volunteerRequests !== undefined || volunteerRequests !== "" ? (
-        <TableContainer component={Paper}>
-          <Table
-            sx={{lg: {minWidth: 650}, xs: {minWidth: "100%"}}}
-            aria-label="simple table"
+      <Dialog
+            fullScreen
+            open={applicationOpen}
+            onClose={() => setApplicationOpen(false)}
+            TransitionComponent={Transition}
           >
-            <TableHead
-              sx={{
-                bgcolor: "primary.main",
+            <AppBar sx={{position: "relative"}}>
+              <Toolbar>
+               
+                <Typography sx={{ml: 2, flex: 1}} variant="h6" component="div">
+                  Volunteer Applications 
+                </Typography>
+                <Button
+                  autoFocus
+                  sx={{bgcolor: "secondary.main"}}
+                  onClick={() => setApplicationOpen(false)}
+                >
+                  close
+                </Button>
+              </Toolbar>
+            </AppBar>
+                  
+            <Container sx={{marginBottom: "100px"}}>
+              <Typography
+                variant="h5"
+                color="primary.main"
+                fontWeight={"bold"}
+                my={4}
+                // marginTop={"10px"}
+              >
+                Application Requests
+              </Typography>
+              {volunteerRequests !== undefined || volunteerRequests !== ""  || volunteerRequests.length>0 ? (
+                <TableContainer component={Paper}>
+                  <Table
+                    sx={{lg: {minWidth: 650}, xs: {minWidth: "100%"}}}
+                    aria-label="simple table"
+                  >
+                    <TableHead
+                      sx={{
+                        bgcolor: "primary.main",
               }}
             >
               <TableRow>
@@ -171,9 +204,10 @@ const ApplicationRequests = ({volunteerRequests, setOpen}: any) => {
           </Table>
         </TableContainer>
       ) : (
-        <Typography>No Requests</Typography>
+        <Typography className="bg-red-400 text-5xl">No Requests</Typography>
       )}
     </Container>
+     </Dialog>
   );
 };
 

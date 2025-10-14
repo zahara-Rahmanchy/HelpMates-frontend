@@ -1,4 +1,5 @@
 "use client";
+import ApplicationRequests from "@/components/UI/Dashboard/ManageOpportunity/ApplicationRequests";
 import CommonPopover from "@/components/UI/Dashboard/ManageOpportunity/component/CommonPopover";
 import EditOpportunityData from "@/components/UI/Dashboard/ManageOpportunity/EditOpportunityData";
 
@@ -35,12 +36,14 @@ import {
 import dayjs from "dayjs";
 import Image from "next/image";
 import Link from "next/link";
-import React, {useEffect, useState} from "react";
+import React, {ReactEventHandler, useEffect, useState} from "react";
 import {toast} from "sonner";
 
 const ManageOpportunityPage = () => {
   const [open, setOpen] = useState(false);
-  const [applicationData, setApplicationData] = useState([]);
+  const [applicationsOpen,  setApplicationsOpen] = useState(false);
+  const [thisOpportunityData, setThisopportunityData] = useState([]);
+  const [thisApplicationRequestsData, setThisApplicationRequestsData] = useState([]);
   const {
     data: opportunityData,
     isLoading,
@@ -55,14 +58,28 @@ const ManageOpportunityPage = () => {
   // console.log("oppor: ", opportunityData);
 
   //   handle edit
-  const handleEdit = async (event: any, applicationRequests: any) => {
+  const handleEdit = async (event: React.MouseEvent<HTMLButtonElement>, opportunityDetails: any) => {
     console.log("event: ", event);
     event.preventDefault();
-    if (applicationRequests) {
+    console.log('vlaue: ',opportunityDetails)
+    if (opportunityDetails) {
       setOpen(true);
-      setApplicationData(applicationRequests);
+      setThisopportunityData(opportunityDetails);
     }
   };
+
+  const handleApplicationsRequests =async(event:React.MouseEvent<HTMLButtonElement>,ApplicationRequests:any)=>{
+    event.preventDefault();
+    // console.log('vlaue: ',ApplicationRequests)
+      setApplicationsOpen(true);
+      // console.log("Open status: ",applicationsOpen)
+      // console.log("djksahbfjkhjhjksdhjk")
+    if (ApplicationRequests) {
+    
+      setThisApplicationRequestsData(ApplicationRequests);
+      // console.log("inside")
+    }
+  }
 
   const handleDeleteOpportunity = async (id: string) => {
     const confirmed = confirm("Are you sure you want to delete the data?");
@@ -255,6 +272,27 @@ const ManageOpportunityPage = () => {
                     <Typography color="blue" textAlign={"center"}>
                       {" "}
                       {value?._count.volunteerApplications as string}
+                      <Button
+                      sx={{
+                        color: "blue",
+                        width: "20px",
+                        textDecoration:"underline",
+                        backgroundColor: "transparent",
+                        fontSize:"12px",
+                        boxShadow: "none",
+                        ":hover": {
+                          backgroundColor: "transparent",
+                          color: "secondary.dark",
+                          boxShadow: "none",
+                        },
+                      }}
+                      onClick={event => handleApplicationsRequests(event, value.volunteerApplications)}
+                      //   component={Link}
+                      //   href={`PetPortfolio/${value?.pet?.id}`}
+                      size="small"
+                    >
+                     View
+                    </Button>
                     </Typography>
                     {/* <Link href={`${}`}></Link> */}
                   </TableCell>
@@ -320,9 +358,14 @@ const ManageOpportunityPage = () => {
       </TableContainer>
 
       <EditOpportunityData
-        opportunityData={applicationData}
+        opportunityData={thisOpportunityData}
         setOpen={setOpen}
         open={open}
+      />
+      <ApplicationRequests
+        volunteerRequests={thisApplicationRequestsData}
+        setApplicationOpen={setApplicationsOpen}
+        applicationOpen={applicationsOpen}
       />
     </Container>
   );

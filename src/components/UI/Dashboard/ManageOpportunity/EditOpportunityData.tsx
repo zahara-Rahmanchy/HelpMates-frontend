@@ -51,7 +51,7 @@ interface IEditProps {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Transition = React.forwardRef(function Transition(
+export const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement;
   },
@@ -59,6 +59,9 @@ const Transition = React.forwardRef(function Transition(
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
+
+
 const EditOpportunityData: FC<IEditProps> = ({
   opportunityData,
   open,
@@ -621,11 +624,11 @@ const EditOpportunityData: FC<IEditProps> = ({
               </Box>
             </Stack>
           </Container>
-          <ApplicationRequests
+          {/* <ApplicationRequests
             volunteerRequests={opportunityData.volunteerApplications}
             setOpen={setOpen}
             // fetchPets={fetchPets}
-          />
+          /> */}
         </Box>
       </Dialog>
     </>

@@ -25,7 +25,7 @@ const Navbar = () => {
   useEffect(() => {
     const user = getUserInfo();
     setUserInfo(user || null);
-  }, []);
+  }, [userInfo]);
 
   return (
     <Box 

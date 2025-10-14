@@ -24,6 +24,14 @@ const volunteerApplicationApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    // approved lists for payouts
+     getApprovedApplicationData: build.query({
+      query: () => ({
+        url: "/approved-applications-for-payments",
+        method: "GET",
+      }),
+      providesTags: [tagTypes.payments],
+    }),
     updateVolunteerApplicationData: build.mutation({
       query: data => {
         // Log the data before making the request
@@ -61,4 +69,5 @@ export const {
   useUpdateVolunteerApplicationDataMutation,
   useGetVolunteerApplicationDataForUserQuery,
   useGetParticipatedDataQuery,
+  useGetApprovedApplicationDataQuery
 } = volunteerApplicationApi;
