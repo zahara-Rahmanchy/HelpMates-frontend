@@ -15,17 +15,17 @@ const TestimonialsPreview = () => {
         colorCode="#F06D64"
       />
      <SubTitle sub={"Testimonials"}/>
-      <div className="grid md:grid-cols-3 gap-6 ">
+      <div className="grid md:grid-cols-3 m-0 p-0 place-items-center">
         {preview.map((t, index) => (
           <TestimonialCard key={index} testimonial={t} />
         ))}
       </div>
-      <div className="mt-10">
+      <div className="my-20 w-full mx-auto text-center ">
         <Link href="/Testimonials">
           <Button sx={{
             width:"200px",
             bgcolor:"primary.main"
-          }}  className=" text-white px-5 py-2 rounded hover:bg-rose-700 bg-rose-950">
+          }}  className=" text-white px-5 py-2 rounded hover:bg-rose-700 bg-rose-950 ">
             View More
           </Button>
         </Link>
