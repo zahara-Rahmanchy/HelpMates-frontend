@@ -15,7 +15,7 @@ const TestimonialsPreview = () => {
         colorCode="#F06D64"
       />
      <SubTitle sub={"Testimonials"}/>
-      <div className="grid md:grid-cols-3 m-0 p-0 place-items-center">
+      <div className="grid md:grid-cols-3 m-0 lg:p-0 p-2 gap-6 place-items-center">
         {preview.map((t, index) => (
           <TestimonialCard key={index} testimonial={t} />
         ))}
