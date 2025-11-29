@@ -8,14 +8,14 @@ import SubTitle from "@/components/shared/SubTitle";
 const TestimonialsPreview = () => {
   const preview = testimonials.slice(0, 3); 
   return (
-    <Box marginX={"auto"} bgcolor={"red"}>
+    <Box marginX={"auto"} width={"100%"}>
        <MainTitle
         
         value={String("What our Partner says")}
         colorCode="#F06D64"
       />
      <SubTitle sub={"Testimonials"}/>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="grid md:grid-cols-3 gap-6 ">
         {preview.map((t, index) => (
           <TestimonialCard key={index} testimonial={t} />
         ))}
