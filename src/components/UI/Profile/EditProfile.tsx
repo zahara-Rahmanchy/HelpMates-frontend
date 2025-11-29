@@ -37,7 +37,7 @@ const EditProfile: FC<props> = ({accessToken}) => {
 
   const onSubmit: SubmitHandler<any> = async data => {
     setLoading(true);
-    console.log(data);
+    // console.log(data);
 
     for (let key in data) {
       if (data[key] === "" || data[key] === undefined || data[key] === null)

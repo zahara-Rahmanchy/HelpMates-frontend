@@ -37,7 +37,7 @@ const opportunityApi = baseApi.injectEndpoints({
     deleteOpportunityData: build.mutation({
       query: data => {
         // Log the data before making the request
-        console.log("Data being sent:", data);
+        // console.log("Data being sent:", data);
 
         return {
           url: `/opportunity/${data.id}`,

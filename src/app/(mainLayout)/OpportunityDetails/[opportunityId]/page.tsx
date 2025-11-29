@@ -18,11 +18,11 @@ import {cookies} from "next/headers";
 // import {toast} from "sonner";
 
 const DetailsPage = async ({params}: opportunityId) => {
-  console.log("params.opportunityId: ", params.opportunityId);
+  // console.log("params.opportunityId: ", params.opportunityId);
   const accessToken = cookies().get(authKey)?.value;
 
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
-  console.log("url: ", `${url}/opportunities/${params.opportunityId}`);
+  // console.log("url: ", `${url}/opportunities/${params.opportunityId}`);
   // try{
   const res = await fetch(`${url}/opportunities/${params.opportunityId}`, {
     method: "GET",

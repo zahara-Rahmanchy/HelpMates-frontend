@@ -6,6 +6,7 @@ import Providers from "@/lib/Providers/Providers";
 import {Toaster} from "sonner";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import ChatComponent from "@/components/shared/Chatbot/ChatComponent";
 const inter = Inter({subsets: ["latin"]});
 
 export const metadata: Metadata = {
@@ -17,12 +18,16 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <Providers>
       <html lang="en">
+         <head>
+        <link rel="icon" href="/favicon.ico" />
+        </head>
         <body className={inter.className}>
           <AppRouterCacheProvider>
             {" "}
             <Toaster position="top-center" />
             {/* <LocalizationProvider dateAdapter={AdapterDayjs}> */}
             {children}
+            <ChatComponent/>
             {/* </LocalizationProvider> */}
           </AppRouterCacheProvider>
         </body>

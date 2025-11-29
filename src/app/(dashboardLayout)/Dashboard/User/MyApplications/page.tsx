@@ -36,7 +36,7 @@ const tableHeads = [
 
 const ApplicationPage = () => {
   const {data, isLoading} = useGetVolunteerApplicationDataForUserQuery("");
-  console.log("appliocation data:", data);
+  // console.log("appliocation data:", data);
   return (
     <Container>
       {isLoading && (

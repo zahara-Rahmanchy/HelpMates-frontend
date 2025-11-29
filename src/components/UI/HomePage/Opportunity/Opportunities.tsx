@@ -49,7 +49,7 @@ export interface IQueryParams {
 }
 
 const Opportunities = ({requests, error, skills}: OpporsProps) => {
-  console.log("requests: ", requests);
+  // console.log("requests: ", requests);
   const router = useRouter();
   const {replace} = useRouter();
   // const searchParams = useSearchParams();

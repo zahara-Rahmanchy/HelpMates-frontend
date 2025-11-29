@@ -39,7 +39,7 @@ const tableHeads = [
 
 const ParticipationPage = () => {
   const {data, isLoading} = useGetParticipatedDataQuery("");
-  console.log("Participation data:", data);
+  // console.log("Participation data:", data);
   return (
     <Container>
       {isLoading && (

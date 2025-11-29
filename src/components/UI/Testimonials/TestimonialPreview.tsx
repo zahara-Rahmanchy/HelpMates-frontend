@@ -8,7 +8,7 @@ import SubTitle from "@/components/shared/SubTitle";
 const TestimonialsPreview = () => {
   const preview = testimonials.slice(0, 3); 
   return (
-    <Box className="pb-10  px-4 md:px-10 text-center" >
+    <Box marginX={"auto"} bgcolor={"red"}>
        <MainTitle
         
         value={String("What our Partner says")}

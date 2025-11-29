@@ -38,7 +38,7 @@ const UsersPage = () => {
   const {data: allusers, isLoading} = useGetAllUsersQuery("");
   const [updateUserData] = useUpdateUserDataMutation();
 
-  console.log("allusers: ", allusers);
+  // console.log("allusers: ", allusers);
 
   const handleDataEdit = async (
     key: string,

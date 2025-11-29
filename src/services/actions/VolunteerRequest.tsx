@@ -11,7 +11,7 @@ const VolunteerRequest = async (
   opportunityData: opportunityData,
   accessToken: string
 ) => {
-  console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/volunteer-application`);
+  // console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/volunteer-application`);
   const url = getEnvVariable("NEXT_PUBLIC_BACKEND_URL");
   const res = await fetch(`${url}/volunteer-application`, {
     method: "POST",

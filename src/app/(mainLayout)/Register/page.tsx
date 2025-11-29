@@ -38,7 +38,7 @@ const RegisterPage = () => {
   const onSubmit: SubmitHandler<Inputs> = async data => {
     setLoading(true);
     const {conpassword, ...userInfo} = data;
-    console.log(userInfo);
+    // console.log(userInfo);
     try {
       const res = await RegisterUser(userInfo);
       // console.log(res);
@@ -50,6 +50,7 @@ const RegisterPage = () => {
       }
     } catch (err) {
       console.log(err);
+      toast.error(err as string || "Something went wrong");
     }
   };
   return (

@@ -15,7 +15,7 @@ const payoutsApi = baseApi.injectEndpoints({
     
     sendPayoutsToVolunteers: build.mutation({
       query:(payments: { volunteerApplicationId: string }[])=>{
-        console.log("data from payout redux: ",payments)
+        // console.log("data from payout redux: ",payments)
         return{
          url: "/send-payout",
          method:"POST",

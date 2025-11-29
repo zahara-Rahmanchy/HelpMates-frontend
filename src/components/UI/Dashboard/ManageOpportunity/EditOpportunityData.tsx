@@ -91,11 +91,11 @@ const EditOpportunityData: FC<IEditProps> = ({
 
   const [updateOpportunityData] = useUpdateOpportunityDataMutation();
   const onSubmit: SubmitHandler<Partial<any>> = async data => {
-    console.log("upd data:", data);
+    // console.log("upd data:", data);
 
-    console.log("upd data:", data);
+    // console.log("upd data:", data);
     const {image, startDate, endDate, skillsRequired, ...rest} = data;
-    console.log("endDate: ", endDate);
+    // console.log("endDate: ", endDate);
     const startDateString = startDate !== "" ? dayjs(startDate) : null;
     const endDateString = endDate !== "" ? dayjs(endDate).toISOString() : null;
     // const startDateString = startDate?.toISOString(); // Converts to ISO string
@@ -126,7 +126,7 @@ const EditOpportunityData: FC<IEditProps> = ({
         endDate: endDateString,
         ...rest,
       };
-      console.log("insert: ", insertData);
+      // console.log("insert: ", insertData);
       for (let key in insertData) {
         if (
           (insertData as any)[key] === "" ||
@@ -138,19 +138,19 @@ const EditOpportunityData: FC<IEditProps> = ({
           delete insertData.image;
         }
       }
-      console.log("insertData: ", insertData);
+      // console.log("insertData: ", insertData);
       const res = await updateOpportunityData({
         id: opportunityData.id,
         body: insertData,
       }).unwrap();
-      console.log("res: ", res);
+      // console.log("res: ", res);
       if (res?.id) {
         toast.success("Opportunity Data updated Successfully!");
         reset();
         setOpen(false);
       }
     } catch (err: any) {
-      console.log("err: ", err);
+      // console.log("err: ", err);
       if (err?.data) {
         toast.error(`${err.data}`);
       } else {

@@ -38,7 +38,7 @@ const SendPayouts = () => {
   const selectedIds = useSelector((state: RootState) => state.payout.selectedIds);
   const [sendApplicationData] = useSendPayoutsToVolunteersMutation();
 
-   console.log("user payoutdata: ",userPayoutData)
+  //  console.log("user payoutdata: ",userPayoutData)
 
   /**************************----Sending Data-----***********************************************/
 
